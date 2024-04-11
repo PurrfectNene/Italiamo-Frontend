@@ -7,7 +7,7 @@ export default function LoginPage() {
   console.log(email, password);
 
   return (
-    <div>
+    <form>
       <label htmlFor="email">Email</label>
       <input
         type="text"
@@ -24,6 +24,6 @@ export default function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-    </div>
+    </form>
   );
 }
