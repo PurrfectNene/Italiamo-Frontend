@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../context/auth.context";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  // const {authenticateUser} = useContext(AuthContext)
+  const {authenticateUser} = useContext(AuthContext)
 
   console.log(email, password);
 
@@ -21,9 +22,9 @@ export default function LoginPage() {
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/auth/login`, body)
-      .then(() => {
-        // localStorage.setItem('authToken',response.data.authToken)
-        // authenticateUser()
+      .then((response) => {
+        localStorage.setItem('authToken',response.data.authToken)
+        authenticateUser()
 
         navigate("/");
       })
