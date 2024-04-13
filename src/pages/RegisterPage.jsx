@@ -11,7 +11,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <Flex component="main" vertical style={{ minHeight: "100svh" }}>
+    <Flex
+      component="main"
+      vertical
+      style={{ minHeight: "calc(100svh - 60px)" }}
+    >
       <Row style={{ flex: 1 }}>
         <Col
           xs={0}

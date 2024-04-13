@@ -1,7 +1,12 @@
 * {
   box-sizing: border-box;
+  font-family: sans-serif, "system-ui"!important;
 }
 
 body {
   margin: 0
+}
+
+.custom-placeholder input::placeholder{
+  color:grey
 }

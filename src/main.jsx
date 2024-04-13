@@ -11,9 +11,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       theme={{
         components: {
           Input: {
-            hoverBorderColor: "#97572f",
-            activeBorderColor: "#97572f",
+            hoverBorderColor: "#927766",
+            activeBorderColor: "#927766",
             activeShadow: "0 0 0 2px rgb(151, 87, 47, 0.2)",
+            colorBgContainer: "#ffffff00",
+            colorBorder: "#a5a5a5",
+            colorText: "#766f6b",
           },
         },
       }}
