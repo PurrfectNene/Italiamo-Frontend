@@ -1,13 +1,36 @@
 import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 const { Text, Title } = Typography;
 
 export default function LoginPage() {
   const [form] = Form.useForm();
+  const [serverError, setServerErrorMessage] = useState(null);
+  const { authenticateUser } = useContext(AuthContext);
 
   function handleSubmit(values) {
-    console.log(values);
+    const { email, password } = values;
+
+    let body = { email, password };
+
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/auth/login`, body)
+      .then((response) => {
+        localStorage.setItem("authToken", response.data.authToken);
+        authenticateUser();
+
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setServerErrorMessage(err.response.data.message);
+      });
   }
+
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -107,6 +130,11 @@ export default function LoginPage() {
               onFinish={handleSubmit}
               form={form}
             >
+              {serverError && (
+                <Text style={{ color: "red", marginBottom: "1rem" }}>
+                  {serverError}
+                </Text>
+              )}
               <Form.Item
                 className="custom-placeholder"
                 name="email"

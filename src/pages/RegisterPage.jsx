@@ -1,12 +1,34 @@
 import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const { Text, Title } = Typography;
 
 export default function RegisterPage() {
   const [form] = Form.useForm();
+  const [serverError, setServerErrorMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   function handleSubmit(values) {
-    console.log(values);
+    const { email, password } = values;
+
+    const newUser = {
+      email,
+      password,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/auth/register`, newUser)
+      .then((createdUser) => {
+        navigate("/login");
+        console.log(createdUser);
+      })
+      .catch((err) => {
+        console.log(err.res.data.message);
+        setServerErrorMessage(err.res.data.message);
+      });
   }
 
   return (
@@ -76,6 +98,11 @@ export default function RegisterPage() {
               onFinish={handleSubmit}
               form={form}
             >
+              {serverError && (
+                <Text style={{ color: "red", marginBottom: "1rem" }}>
+                  {serverError}
+                </Text>
+              )}
               <Form.Item
                 className="custom-placeholder"
                 name="email"
