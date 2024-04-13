@@ -1,14 +1,14 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Button, Col, Flex, Input, Row, Typography } from "antd";
-import { useState } from "react";
+import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
 
-const { Paragraph, Text, Title } = Typography;
+const { Text, Title } = Typography;
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form] = Form.useForm();
 
-  console.log(email, password);
+  function handleSubmit(values) {
+    console.log(values);
+  }
 
   return (
     <Flex component="main" vertical style={{ minHeight: "100svh" }}>
@@ -17,9 +17,7 @@ export default function LoginPage() {
           xs={0}
           lg={12}
           style={{ backgroundColor: "#97572f", flex: "1 1 50%" }}
-        >
-          a
-        </Col>
+        ></Col>
         <Col
           xs={24}
           lg={12}
@@ -37,12 +35,12 @@ export default function LoginPage() {
             style={{
               textAlign: "center",
               color: "#97572f",
-              fontSize: "3.4rem",
+              fontSize: "2.75rem",
               fontWeight: "bolder",
               marginBottom: 0,
             }}
           >
-            Welcome
+            Welcome Back!
           </Title>
           <Text
             style={{
@@ -51,38 +49,53 @@ export default function LoginPage() {
               color: "grey",
             }}
           >
-            Login with Email
+            Login with email
           </Text>
-          <Flex
-            component="form"
-            vertical
+          <Form
+            id="login"
             style={{ width: "100%", maxWidth: "320px" }}
+            layout="vertical"
+            onFinish={handleSubmit}
+            form={form}
           >
-            <label htmlFor="email">
-              <Text>Email</Text>
-            </label>
-            <Input
-              size="large"
-              type="text"
-              id="email"
+            <Form.Item
               name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              prefix={<UserOutlined />}
-            />
-            <label htmlFor="password" style={{ marginTop: "0.5rem" }}>
-              <Text>Password</Text>
-            </label>
-            <Input
-              size="large"
-              type="password"
-              id="password"
+              label="Email"
+              style={{ marginBottom: "1rem" }}
+              rules={[
+                { required: true, message: "Please input your email!" },
+                {
+                  validator: async (_, value) => {
+                    if (!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value))
+                      return Promise.reject();
+                    return Promise.resolve();
+                  },
+                  message: "Invalid email format.",
+                },
+              ]}
+            >
+              <Input
+                autoComplete="email"
+                size="large"
+                prefix={<UserOutlined />}
+              />
+            </Form.Item>
+
+            <Form.Item
               name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              prefix={<UserOutlined />}
-            />
-          </Flex>
+              label="Password"
+              style={{ marginBottom: "1rem" }}
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password
+                autoComplete="current-password"
+                size="large"
+                prefix={<UserOutlined />}
+              />
+            </Form.Item>
+          </Form>
           <Button
             type="primary"
             style={{
@@ -93,7 +106,9 @@ export default function LoginPage() {
               height: "2.75rem",
               borderRadius: "0.25rem",
             }}
+            htmlType="submit"
             size="large"
+            form="login"
           >
             LOGIN
           </Button>
