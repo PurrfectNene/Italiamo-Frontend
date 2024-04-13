@@ -4,12 +4,13 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import IsAnon from "./components/IsAnon";
+import IsPrivate from "./components/IsPrivate";
 import AllRegionsPage from "./pages/AllRegionsPage"
 import RegionDetailsPage from "./pages/RegionDetailsPage";
 import AllCitiesPage from "./pages/AllCitiesPage";
 import CityDetailsPage from "./pages/CityDetailsPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
-
 
 function App() {
   return (
