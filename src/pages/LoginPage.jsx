@@ -13,7 +13,7 @@ export default function LoginPage() {
     <Flex
       component="main"
       vertical
-      style={{ minHeight: "calc(100svh - 60px)", fontFamily: "unset" }}
+      style={{ minHeight: "calc(100svh - 60px)" }}
     >
       <Row style={{ flex: 1 }}>
         <Col

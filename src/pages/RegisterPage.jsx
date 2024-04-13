@@ -1,4 +1,3 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
 
 const { Text, Title } = Typography;
@@ -20,7 +19,12 @@ export default function RegisterPage() {
         <Col
           xs={0}
           lg={12}
-          style={{ backgroundColor: "#97572f", flex: "1 1 50%" }}
+          style={{
+            flex: "1 1 50%",
+            backgroundImage: "url(/firenze-toscana.webp)",
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+          }}
         ></Col>
         <Col
           xs={24}
@@ -32,114 +36,126 @@ export default function RegisterPage() {
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
+            backgroundColor: "#efe9db",
           }}
         >
-          <Title
-            level={1}
+          <Flex
+            vertical
+            justify="center"
+            align="center"
             style={{
-              textAlign: "center",
-              color: "#97572f",
-              fontSize: "2.75rem",
-              fontWeight: "bolder",
-              marginBottom: 0,
+              borderRadius: "0.3rem",
+              position: "relative",
             }}
           >
-            Welcome to Italiamo!
-          </Title>
-          <Text
-            style={{
-              marginBottom: "1.5rem",
-              marginTop: "0.15rem",
-              color: "grey",
-            }}
-          >
-            Create a new account
-          </Text>
-          <Form
-            id="register"
-            style={{ width: "100%", maxWidth: "320px" }}
-            layout="vertical"
-            onFinish={handleSubmit}
-            form={form}
-          >
-            <Form.Item
-              name="email"
-              label="Email"
-              style={{ marginBottom: "1rem" }}
-              rules={[
-                { required: true, message: "Please input your email!" },
-                {
-                  validator: async (_, value) => {
-                    if (!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value))
-                      return Promise.reject();
-                    return Promise.resolve();
-                  },
-                  message: "Invalid email format.",
-                },
-              ]}
+            <Title
+              level={1}
+              style={{
+                textAlign: "center",
+                color: "#927766",
+                fontSize: "2.75rem",
+                fontWeight: "bolder",
+                marginBottom: 0,
+              }}
             >
-              <Input
-                autoComplete="email"
-                size="large"
-                prefix={<UserOutlined />}
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="password"
-              label="Password"
-              style={{ marginBottom: "1rem" }}
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
+              Welcome to Italiamo!
+            </Title>
+            <Text
+              style={{
+                marginBottom: "1.5rem",
+                marginTop: "0.15rem",
+                color: "#6e6e6e",
+              }}
             >
-              <Input.Password
-                autoComplete="new-password"
-                size="large"
-                prefix={<UserOutlined />}
-              />
-            </Form.Item>
-            <Form.Item
-              name="confirm-password"
-              label="Confirm Password"
-              style={{ marginBottom: "1rem" }}
-              rules={[
-                { required: true, message: "Please confirm your password!" },
-                ({ getFieldValue }) => {
-                  return {
+              Create a new account
+            </Text>
+            <Form
+              id="register"
+              style={{ width: "100%", maxWidth: "320px" }}
+              layout="vertical"
+              onFinish={handleSubmit}
+              form={form}
+            >
+              <Form.Item
+                className="custom-placeholder"
+                name="email"
+                label=""
+                style={{ marginBottom: "1rem" }}
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                  {
                     validator: async (_, value) => {
-                      if (value != getFieldValue("password"))
+                      if (
+                        !/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value)
+                      )
                         return Promise.reject();
                       return Promise.resolve();
                     },
-                    message: "The passwords do not match.",
-                  };
-                },
-              ]}
+                    message: "Invalid email format.",
+                  },
+                ]}
+              >
+                <Input autoComplete="email" size="large" placeholder="Email" />
+              </Form.Item>
+
+              <Form.Item
+                name="password"
+                label=""
+                style={{ marginBottom: "1rem" }}
+                rules={[
+                  { required: true, message: "Please input your password!" },
+                ]}
+              >
+                <Input.Password
+                  className="custom-placeholder"
+                  autoComplete="new-password"
+                  size="large"
+                  placeholder="Password"
+                />
+              </Form.Item>
+              <Form.Item
+                name="confirm-password"
+                label=""
+                style={{ marginBottom: "1rem" }}
+                rules={[
+                  { required: true, message: "Please confirm your password!" },
+                  ({ getFieldValue }) => {
+                    return {
+                      validator: async (_, value) => {
+                        if (value != getFieldValue("password"))
+                          return Promise.reject();
+                        return Promise.resolve();
+                      },
+                      message: "The passwords do not match.",
+                    };
+                  },
+                ]}
+              >
+                <Input.Password
+                  className="custom-placeholder"
+                  autoComplete="new-password"
+                  size="large"
+                  placeholder="Confirm Password"
+                />
+              </Form.Item>
+            </Form>
+            <Button
+              type="primary"
+              style={{
+                backgroundColor: "#927766",
+                marginTop: "0.8rem",
+                paddingLeft: "1.9rem",
+                paddingRight: "1.9rem",
+                height: "2.75rem",
+                borderRadius: "0.25rem",
+              }}
+              htmlType="submit"
+              size="large"
+              form="register"
             >
-              <Input.Password
-                autoComplete="new-password"
-                size="large"
-                prefix={<UserOutlined />}
-              />
-            </Form.Item>
-          </Form>
-          <Button
-            type="primary"
-            style={{
-              backgroundColor: "#97572f",
-              marginTop: "2rem",
-              paddingLeft: "1.9rem",
-              paddingRight: "1.9rem",
-              height: "2.75rem",
-              borderRadius: "0.25rem",
-            }}
-            htmlType="submit"
-            size="large"
-            form="register"
-          >
-            REGISTER
-          </Button>
+              REGISTER
+            </Button>
+          </Flex>
         </Col>
       </Row>
     </Flex>
