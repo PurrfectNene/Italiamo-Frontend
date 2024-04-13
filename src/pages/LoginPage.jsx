@@ -1,67 +1,203 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
 import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
+const { Text, Title } = Typography;
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [form] = Form.useForm();
+  const [serverError, setServerErrorMessage] = useState(null);
+  const { authenticateUser } = useContext(AuthContext);
 
-  const {authenticateUser} = useContext(AuthContext)
-
-  console.log(email, password);
-
-  const navigate = useNavigate();
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+  function handleSubmit(values) {
+    const { email, password } = values;
 
     let body = { email, password };
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/auth/login`, body)
       .then((response) => {
-        localStorage.setItem('authToken',response.data.authToken)
-        authenticateUser()
+        localStorage.setItem("authToken", response.data.authToken);
+        authenticateUser();
 
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        setErrorMessage(err.response.data.message);
+        setServerErrorMessage(err.response.data.message);
       });
-  };
+  }
+
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <form onSubmit={handleLoginSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="text"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+    <Flex
+      component="main"
+      vertical
+      style={{ minHeight: "calc(100svh - 60px)" }}
+    >
+      <Row style={{ flex: 1 }}>
+        <Col
+          xs={0}
+          lg={12}
+          style={{
+            flex: "1 1 50%",
+            backgroundImage: "url(/firenze-toscana.webp)",
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+          }}
+        ></Col>
+        <Col
+          xs={24}
+          lg={12}
+          style={{
+            minHeight: "100%",
+            padding: "2rem",
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "#efe9db",
+          }}
+        >
+          <Flex
+            vertical
+            justify="center"
+            align="center"
+            style={{
+              // backgroundColor: "white",
+              // padding: "2rem",
+              borderRadius: "0.3rem",
+              position: "relative",
+            }}
+          >
+            {/* <Flex
+              style={{
+                backgroundColor: "white",
+                position: "absolute",
+                top: "-3.75rem",
+                height: "7.5rem",
+                width: "7.5rem",
+                borderRadius: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Flex
+                style={{
+                  backgroundColor: "#927766",
+                  height: "6.875rem",
+                  width: "6.875rem",
+                  borderRadius: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "4rem",
+                  color: "white",
+                }}
+              >
+                <UserOutlined />
+              </Flex>
+            </Flex> */}
+            <Title
+              level={1}
+              style={{
+                textAlign: "center",
+                color: "#927766",
+                fontSize: "2.75rem",
+                fontWeight: "bolder",
+                marginBottom: 0,
+              }}
+            >
+              Welcome Back!
+            </Title>
+            <Text
+              style={{
+                marginBottom: "1.5rem",
+                marginTop: "0.15rem",
+                color: "#6e6e6e",
+              }}
+            >
+              Login with email
+            </Text>
+            <Form
+              id="login"
+              style={{ width: "100%", maxWidth: "320px" }}
+              layout="vertical"
+              onFinish={handleSubmit}
+              form={form}
+            >
+              {serverError && (
+                <Text style={{ color: "red", marginBottom: "1rem" }}>
+                  {serverError}
+                </Text>
+              )}
+              <Form.Item
+                className="custom-placeholder"
+                name="email"
+                label=""
+                style={{ marginBottom: "1rem" }}
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                  {
+                    validator: async (_, value) => {
+                      if (
+                        !/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value)
+                      )
+                        return Promise.reject();
+                      return Promise.resolve();
+                    },
+                    message: "Invalid email format.",
+                  },
+                ]}
+              >
+                <Input
+                  autoComplete="email"
+                  size="large"
+                  // prefix={<UserOutlined />}
+                  placeholder="Email"
+                />
+              </Form.Item>
 
-        <button type="submit">Login</button>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/register"}> Sign Up</Link>
-    </div>
+              <Form.Item
+                name="password"
+                label=""
+                style={{ marginBottom: "1rem" }}
+                rules={[
+                  { required: true, message: "Please input your password!" },
+                ]}
+              >
+                <Input.Password
+                  className="custom-placeholder"
+                  autoComplete="current-password"
+                  size="large"
+                  // prefix={<UserOutlined />}
+                  placeholder="Password"
+                />
+              </Form.Item>
+            </Form>
+            <Button
+              type="primary"
+              style={{
+                backgroundColor: "#927766",
+                marginTop: "0.8rem",
+                paddingLeft: "1.9rem",
+                paddingRight: "1.9rem",
+                height: "2.75rem",
+                borderRadius: "0.25rem",
+              }}
+              htmlType="submit"
+              size="large"
+              form="login"
+            >
+              LOGIN
+            </Button>
+          </Flex>
+        </Col>
+      </Row>
+    </Flex>
   );
 }
-
