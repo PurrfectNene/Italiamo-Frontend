@@ -27,8 +27,9 @@ function AuthProviderWrapper(props){
             setIsLoggedIn(false);
             setIsLoading(false);
             setUser(null);    
-            console.error('Error fetching user data:', error);    
-          });      
+            console.error('Error fetching user data:', error);
+            localStorage.removeItem("authToken")
+          });
         } else {
             setIsLoggedIn(false);
             setIsLoading(false);
