@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Card } from 'antd';
+import { Card, Button, Flex } from 'antd'; 
+import { AuthContext } from "../context/auth.context";
 const { Meta } = Card;
 
 function AllRegionsPage() {
+    const { isLoggedIn } = useContext(AuthContext)
+
     const [regions, setRegions] = useState([]);
 
     useEffect(() => {
@@ -24,7 +27,7 @@ function AllRegionsPage() {
     return (
         <div>
             <div style={{ backgroundImage: 'url("https://cdn.kimkim.com/files/a/images/55d7ea8718fda7b5b1c4c3a68f239c128e5b29a6/original-3e27ca9d22872719551bce400ed6a7db.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '50vh' }}>
-            <h1 style={{ position: 'absolute',left: '50%', transform: 'translateX(-50%)', fontWeight: 'bold', color: '#fff', fontSize: '46px' }}>Italian Regions</h1>
+                <h1 style={{ position: 'absolute',left: '50%', transform: 'translateX(-50%)', fontWeight: 'bold', color: '#fff', fontSize: '46px' }}>Italian Regions</h1>
             </div>
             <div style={{backgroundColor: 'rgba(242, 240, 228, 0.2)', padding: '20px', textAlign: 'center' }}>
                 <h2 style={{fontSize: '36px'}}>Go in search of the most beautiful places in Italy, get lost in the wonders of its regions</h2>
@@ -33,16 +36,20 @@ function AllRegionsPage() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {regions.map(region => (
-                    <Card
-                        key={region._id}
-                        hoverable
-                        style={{ width: 300, margin: 20 }}
-                        cover={<img alt={region.name} src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg" />} 
-                    >
-                        <Link to={`/regions/${region._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <Link to={`/regions/${region._id}`} key={region._id} style={{ textDecoration: "none", color: "inherit" }}>
+                        <Card
+                            hoverable
+                            style={{ width: 300, margin: 20 }}
+                            cover={<img alt={region.name} src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg" />} 
+                        >
                             <Meta title={region.name} description={truncateDescription(region.description)} />
-                        </Link>
-                    </Card>
+                            <br></br>
+                            <Flex gap="small" wrap="wrap">
+                                {isLoggedIn && <Button>Add to favourite</Button>}
+                                <Button type="link">What to see</Button>
+                            </Flex>
+                        </Card>
+                    </Link>
                 ))}
             </div>
         </div>
@@ -50,4 +57,7 @@ function AllRegionsPage() {
 }
 
 export default AllRegionsPage;
+
+
+
 
