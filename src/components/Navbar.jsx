@@ -7,16 +7,16 @@ import "./Navbar.css";
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
-  const items = [
-    {
-      key: 0,
-      label: <Link to={"/login"}>Login</Link>,
-    },
-    {
-      key: 1,
-      label: <Link to={"/register"}>Register</Link>,
-    },
-  ];
+  // const items = [
+  //   {
+  //     key: 0,
+  //     label: <Link to={"/login"}>Login</Link>,
+  //   },
+  //   {
+  //     key: 1,
+  //     label: <Link to={"/register"}>Register</Link>,
+  //   },
+  // ];
 
   return (
     <Flex
@@ -66,12 +66,25 @@ export default function Navbar() {
         }}
         size={"large"}
       >
-        <Link className="menu-link" to="/login">
-          Login
-        </Link>
-        <Link className="menu-link" to="/register">
-          Create account
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <Link className="menu-link" to="/login">
+              Login
+            </Link>
+            <Link className="menu-link" to="/register">
+              Create account
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link className="menu-link" to="/login">
+              Login
+            </Link>
+            <Link className="menu-link" to="/register">
+              Create account
+            </Link>
+          </>
+        )}
       </Space>
       {/* {isLoggedIn ? (
         <></>
