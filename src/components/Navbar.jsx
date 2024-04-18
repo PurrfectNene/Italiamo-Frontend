@@ -48,7 +48,8 @@ export default function Navbar() {
           What to do
         </Link>
       </Space>
-      <span
+      <Link
+        to="/"
         className="roboto-slab"
         style={{
           fontSize: "2rem",
@@ -56,7 +57,7 @@ export default function Navbar() {
         }}
       >
         ITALIAMO
-      </span>
+      </Link>
       <Space
         style={{
           fontSize: "1.1rem",
