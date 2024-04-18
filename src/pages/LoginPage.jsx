@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import "./LoginPage.css";
 
 const { Text, Title } = Typography;
 
@@ -52,6 +53,7 @@ export default function LoginPage() {
         <Col
           xs={24}
           lg={12}
+          className="background-pattern"
           style={{
             minHeight: "100%",
             padding: "2rem",
@@ -67,41 +69,10 @@ export default function LoginPage() {
             justify="center"
             align="center"
             style={{
-              // backgroundColor: "white",
-              // padding: "2rem",
               borderRadius: "0.3rem",
               position: "relative",
             }}
           >
-            {/* <Flex
-              style={{
-                backgroundColor: "white",
-                position: "absolute",
-                top: "-3.75rem",
-                height: "7.5rem",
-                width: "7.5rem",
-                borderRadius: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Flex
-                style={{
-                  backgroundColor: "#927766",
-                  height: "6.875rem",
-                  width: "6.875rem",
-                  borderRadius: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: "4rem",
-                  color: "white",
-                }}
-              >
-                <UserOutlined />
-              </Flex>
-            </Flex> */}
             <Title
               level={1}
               style={{
@@ -159,6 +130,7 @@ export default function LoginPage() {
                   size="large"
                   // prefix={<UserOutlined />}
                   placeholder="Email"
+                  style={{ backgroundColor: "#efe9db" }}
                 />
               </Form.Item>
 
@@ -176,6 +148,7 @@ export default function LoginPage() {
                   size="large"
                   // prefix={<UserOutlined />}
                   placeholder="Password"
+                  style={{ backgroundColor: "#efe9db" }}
                 />
               </Form.Item>
             </Form>

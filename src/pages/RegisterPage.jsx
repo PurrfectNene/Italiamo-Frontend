@@ -49,6 +49,7 @@ export default function RegisterPage() {
           }}
         ></Col>
         <Col
+          className="background-pattern"
           xs={24}
           lg={12}
           style={{
@@ -107,7 +108,7 @@ export default function RegisterPage() {
                 className="custom-placeholder"
                 name="email"
                 label=""
-                style={{ marginBottom: "1rem" }}
+                style={{ marginBottom: "1rem", backgroundColor: "#efe9db" }}
                 rules={[
                   { required: true, message: "Please input your email!" },
                   {
@@ -138,6 +139,7 @@ export default function RegisterPage() {
                   autoComplete="new-password"
                   size="large"
                   placeholder="Password"
+                  style={{ backgroundColor: "#efe9db" }}
                 />
               </Form.Item>
               <Form.Item
@@ -163,6 +165,7 @@ export default function RegisterPage() {
                   autoComplete="new-password"
                   size="large"
                   placeholder="Confirm Password"
+                  style={{ backgroundColor: "#efe9db" }}
                 />
               </Form.Item>
             </Form>
