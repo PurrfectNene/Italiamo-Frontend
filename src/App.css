@@ -1,6 +1,10 @@
 * {
   box-sizing: border-box;
-  font-family: sans-serif, "system-ui"!important;
+  font-family: sans-serif, "system-ui";
+}
+
+.roboto-slab {
+  font-family: 'Roboto Slab Variable', serif;
 }
 
 body {
