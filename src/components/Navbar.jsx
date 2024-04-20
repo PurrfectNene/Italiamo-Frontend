@@ -56,7 +56,7 @@ export default function Navbar() {
           color: "#5f4e44",
         }}
       >
-        ITALIAMO
+         <img src="/italiamo-black.png" alt="Logo Italiamo" width="50" height="auto" />
       </Link>
       <Space
         style={{
