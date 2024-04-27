@@ -11,6 +11,7 @@ import RegionDetailsPage from "./pages/RegionDetailsPage";
 import AllCitiesPage from "./pages/AllCitiesPage";
 import CityDetailsPage from "./pages/CityDetailsPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
