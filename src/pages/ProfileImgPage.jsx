@@ -17,7 +17,7 @@ function ProfileImgPage() {
       uploadData.append("imageUrl", e.target.files[0]);
   
       axios
-        .post("http://localhost:5005/api/upload", uploadData)
+        .post(`${import.meta.env.VITE_API_URL}`/api/upload, uploadData)
         .then((response) => {
           console.log(response.data.fileUrl);
           setImageUrl(response.data.fileUrl);
@@ -33,7 +33,7 @@ function ProfileImgPage() {
 
     function updatePicture(){
 
-      axios.post(`http://localhost:5005/api/profile/image`,{_id:user._id,imageUrl})
+      axios.post(`${import.meta.env.VITE_API_URL}/api/profile/image`,{_id:user._id,imageUrl})
       .then(response=>{
         console.log(response.data)
       })
