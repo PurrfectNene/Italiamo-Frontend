@@ -6,6 +6,7 @@ import "./Navbar.css";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
+  console.log(isLoggedIn)
 
   // const items = [
   //   {

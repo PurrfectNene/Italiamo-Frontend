@@ -26,6 +26,7 @@ function App() {
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />} />
+        <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} /> 
       </Routes>
     </div>
   );

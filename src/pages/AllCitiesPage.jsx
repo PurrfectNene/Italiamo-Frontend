@@ -21,7 +21,7 @@ function AllCitiesPage() {
   const truncateDescription = (description) => {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
   };
-//update internal links
+
   return (
     <div>
       <div

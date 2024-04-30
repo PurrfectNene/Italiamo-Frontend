@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import Review from "../components/Review"
 
 function PlaceDetailsPage() {
     const { cityId, placeId } = useParams();
@@ -29,6 +30,7 @@ function PlaceDetailsPage() {
         <div>
             <h1>{place.name}</h1>
             <p>{place.description}</p>
+            <Review placeId={placeId} />
         </div>
     );
 }
