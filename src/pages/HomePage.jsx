@@ -140,7 +140,7 @@ function HomePage() {
               <Card
                 hoverable
                 style={{ width: 300, margin: 20 }}
-                cover={<img alt={region.name} src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg" />}
+                cover={<img alt={region.name} src={region.imageUrl} />}
               >
                 <Meta title={region.name} description={truncateDescription(region.description)} />
                 <br></br>
@@ -162,7 +162,7 @@ function HomePage() {
               <Card
                 hoverable
                 style={{ width: 300, margin: 20 }}
-                cover={<img alt={city.name} src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg" />}
+                cover={<img alt={city.name} src={city.imageUrl} />}
               >
                 <Link to={`/regions/${city.region._id}`} style={{ textDecoration: "none", color: "inherit" }}>
                   <Meta title={city.name} description={truncateDescription(city.description)} />
