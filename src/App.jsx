@@ -12,6 +12,8 @@ import AllCitiesPage from "./pages/AllCitiesPage";
 import CityDetailsPage from "./pages/CityDetailsPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
 import Footer from "./components/Footer";
+import UserPage from "./pages/UserPage";
+import ProfileImgPage from "./pages/ProfileImgPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />} />
+        <Route exact path="/profile" element={<IsPrivate><UserPage /></IsPrivate>} />
+        <Route exact path="/profile-picture" element={<IsPrivate><ProfileImgPage /></IsPrivate>} />
       </Routes>
       <Footer/>
     </div>
