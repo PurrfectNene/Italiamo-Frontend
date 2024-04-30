@@ -67,6 +67,7 @@ function AllCitiesPage() {
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {cities.map((city) => {
+          console.log(city)
           {
             /*           <Link to={`/cities/${city._id}`} key={city._id} style={{ textDecoration: "none", color: "inherit" }}>
              */
@@ -79,7 +80,7 @@ function AllCitiesPage() {
               cover={
                 <img
                   alt={city.name}
-                  src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg"
+                  src={city.imageUrl}
                 />
               }
             >

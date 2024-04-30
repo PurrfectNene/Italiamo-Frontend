@@ -1,17 +1,21 @@
-import React from "react";
+import {useContext} from "react";
 import './UserPage.css'; 
-import ProfilePicture from "../components/ProfilePicture";
+import ProfileImgPage from "./ProfileImgPage";
+import { AuthContext } from "../context/auth.context";
 
 
 function UserPage() {
   // const image = <ProfilePicture/>
-  const image = 'https://res.cloudinary.com/dwrndt1iw/image/upload/v1714496934/italiamo-project/fo8grvgxtaclfrvltoxh.jpg'
-  const email = `iiii@test.com`
+  const image = <ProfileImgPage/>
+
+  const {user} = useContext(AuthContext)
+  console.log(user)
+  const email = user.email
 
   return (
     <div className="user-profile">
       <div className="user-image">
-        <img src={image} alt={`ciao`} />
+        <img src={user.imageUrl} alt={`ciao`} />
       </div>
       <div>
         <p>{email}</p>
