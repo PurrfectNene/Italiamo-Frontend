@@ -1,3 +1,6 @@
+import "@fontsource-variable/inter";
+import "@fontsource-variable/roboto-slab";
+import "@fontsource/roboto";
 import { ConfigProvider } from "antd";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -5,7 +8,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App.jsx";
 import { AuthProviderWrapper } from "./context/auth.context.jsx";
 import "./index.css";
-import "@fontsource-variable/roboto-slab";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/outfit";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
