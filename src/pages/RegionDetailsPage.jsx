@@ -1,10 +1,12 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Wrapper } from "@googlemaps/react-wrapper";
-import { Button, Carousel, Col, Rate, Row } from "antd";
+import { Button, Carousel, Col, Rate, Row, Tabs } from "antd";
+import TabPane from "antd/es/tabs/TabPane";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import GoogleMap from "../components/GoogleMap";
+import PlaceCard from "../components/PlaceCard";
 import "./RegionDetailsPage.css";
 
 function RegionDetailsPage() {
@@ -12,6 +14,8 @@ function RegionDetailsPage() {
   const [region, setRegion] = useState(null);
   const [cities, setCities] = useState([]);
   const [places, setPlaces] = useState([]);
+  const [placesFilter, setPlacesFilter] = useState("Cultural");
+  const filteredPlaces = places.filter((place) => place.type === placesFilter);
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +51,13 @@ function RegionDetailsPage() {
   }
 
   return (
-    <div style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+    <div
+      style={{
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        paddingBottom: "2rem",
+      }}
+    >
       <div
         id="region-preview"
         style={{
@@ -313,6 +323,125 @@ function RegionDetailsPage() {
             ))}
           </ul>
         </Row> */}
+      </section>
+      <section
+        id="cities"
+        style={{
+          display: "flex",
+          position: "relative",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            display: "flex",
+            position: "relative",
+            justifyContent: "center",
+            width: "100%",
+            marginTop: "1rem",
+            flexDirection: "column",
+          }}
+        >
+          <h1 style={{ textAlign: "center", marginTop: 24, marginBottom: 6 }}>
+            What to see in {region.name}
+          </h1>
+          <Tabs
+            defaultActiveKey="Cultural"
+            style={{ width: "100%" }}
+            centered
+            onChange={(key) => {
+              setPlacesFilter(key);
+            }}
+          >
+            <TabPane tab="Cultural" key="Cultural">
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                {filteredPlaces.slice(0, 4).map((place, index) => (
+                  <PlaceCard
+                    key={index}
+                    name={place.name}
+                    imageSrc={place.imageUrl}
+                  />
+                ))}
+              </div>
+            </TabPane>
+            <TabPane tab="Food&Wine" key="Food&Wine">
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                {filteredPlaces.slice(0, 4).map((place, index) => (
+                  <PlaceCard
+                    key={index}
+                    name={place.name}
+                    imageSrc={place.imageUrl}
+                  />
+                ))}
+              </div>
+            </TabPane>
+
+            <TabPane tab="Relax&Wellness" key="Relax&Wellness">
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                {filteredPlaces.slice(0, 4).map((place, index) => (
+                  <PlaceCard
+                    key={index}
+                    name={place.name}
+                    imageSrc={place.imageUrl}
+                  />
+                ))}
+              </div>
+            </TabPane>
+            <TabPane tab="Villages" key="Villages">
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                {filteredPlaces.slice(0, 4).map((place, index) => (
+                  <PlaceCard
+                    key={index}
+                    name={place.name}
+                    imageSrc={place.imageUrl}
+                  />
+                ))}
+              </div>
+            </TabPane>
+            <TabPane tab="Nature" key="Nature">
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                {filteredPlaces.slice(0, 4).map((place, index) => (
+                  <PlaceCard
+                    key={index}
+                    name={place.name}
+                    imageSrc={place.imageUrl}
+                  />
+                ))}
+              </div>
+            </TabPane>
+          </Tabs>
+        </div>
       </section>
     </div>
   );
