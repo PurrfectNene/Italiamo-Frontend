@@ -71,6 +71,25 @@ function HomePage() {
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
   };
+
+  const renderPlaceCards = (type) => {
+    return places
+      .filter(place => place.type === type)
+      .slice(0, 5)
+      .map(place => (
+        <Link to={`/places/${place._id}`} key={place._id} style={{ textDecoration: "none", color: "inherit" }}>
+          <Card
+            hoverable
+            style={{ width: 300, margin: 20 }}
+            cover={<img alt={place.name} src={place.imageUrl} />}
+          >
+            
+            <Flex gap="small" wrap="wrap" style={{ justifyContent: 'flex-end' }}>
+            </Flex>
+          </Card>
+        </Link>
+      ));
+  };
   
 // carrousel & links to revise
   return (
@@ -180,20 +199,9 @@ function HomePage() {
       <div>
         <h2>Getting inspiration</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {places.map(place => (
-            <Link to={`/places/${place._id}`} key={place._id} style={{ textDecoration: "none", color: "inherit" }}>
-              <Card
-                hoverable
-                style={{ width: 300, margin: 20 }}
-                cover={<img alt={place.name} src="https://www.tripsavvy.com/thmb/GkseXC4UpBf4Op9gW17b-cm2gsg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/map-of-italy--150365156-59393b0d3df78c537b0d8aa6.jpg" />}
-              >
-                <Meta title={place.name} description={truncateDescription(place.description)} />
-                <Flex gap="small" wrap="wrap" style={{ justifyContent: 'flex-end' }}>
-                  <Button type="link">What to see</Button>
-                </Flex>
-              </Card>
-            </Link>
-          ))}
+          {renderPlaceCards("Cultural")}
+          {renderPlaceCards("Villages")}
+          {/* Render cards for other types of places as needed */}
         </div>
       </div>
     </div>

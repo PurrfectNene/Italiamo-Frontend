@@ -26,8 +26,8 @@ export default function RegisterPage() {
         console.log(createdUser);
       })
       .catch((err) => {
-        console.log(err.res.data.message);
-        setServerErrorMessage(err.res.data.message);
+        console.log(err)
+        setServerErrorMessage(err?.response?.data?.message);
       });
   }
 
