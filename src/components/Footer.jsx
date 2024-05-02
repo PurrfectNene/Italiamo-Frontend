@@ -1,14 +1,18 @@
-import React from "react";
 import {
   FacebookFilled,
   InstagramFilled,
   TwitterSquareFilled,
 } from "@ant-design/icons";
 import { Space } from "antd";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
+  const { pathname } = useLocation();
+  if (pathname === "/dashboard") {
+    return null;
+  }
   return (
     <div className="footer">
       <Link to="/login">
@@ -20,7 +24,6 @@ function Footer() {
       </Link>
 
       <div className="login-signup-footer">
-
         <div>
           <h5>Follow us:</h5>
         </div>
@@ -32,7 +35,6 @@ function Footer() {
             <InstagramFilled />
           </Space>
         </div>
-
       </div>
     </div>
   );

@@ -1,23 +1,16 @@
 import { Flex, Space } from "antd";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "./Navbar.css";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
-  // const items = [
-  //   {
-  //     key: 0,
-  //     label: <Link to={"/login"}>Login</Link>,
-  //   },
-  //   {
-  //     key: 1,
-  //     label: <Link to={"/register"}>Register</Link>,
-  //   },
-  // ];
-
+  const { pathname } = useLocation();
+  if (pathname === "/dashboard") {
+    return null;
+  }
   return (
     <Flex
       component="nav"
@@ -56,7 +49,12 @@ export default function Navbar() {
           color: "#5f4e44",
         }}
       >
-         <img src="/italiamo-black.png" alt="Logo Italiamo" width="50" height="auto" />
+        <img
+          src="/italiamo-black.png"
+          alt="Logo Italiamo"
+          width="50"
+          height="auto"
+        />
       </Link>
       <Space
         style={{
