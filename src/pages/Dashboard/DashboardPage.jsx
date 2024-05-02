@@ -43,12 +43,11 @@ export default function DashboardPage() {
   }
 
   const onClick = (e) => {
-    console.log("click ", e);
     setUrlSearchParams(() => ({ page: e.key }));
   };
 
   return (
-    <Flex style={{ height: "100svh", background: "#f4f4f4" }}>
+    <Flex style={{ minHeight: "100svh", background: "#f4f4f4" }}>
       <Col
         style={{
           background: "white",
@@ -56,6 +55,9 @@ export default function DashboardPage() {
           borderTopRightRadius: "0.5rem",
           borderBottomRightRadius: "0.5rem",
           padding: "0 0 1.5rem",
+          height: "100svh",
+          position: "sticky",
+          top: 0,
         }}
       >
         <Flex justify="center" align="center" style={{ padding: "0.5rem" }}>
