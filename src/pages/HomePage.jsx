@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Card, Button, Flex, Input, Select, List } from 'antd';
+import { Carousel, Card, Button, Flex, Input, Select, List } from 'antd';
 const { Meta } = Card;
 const { Option } = Select;
 
@@ -72,25 +73,47 @@ function HomePage() {
     );
   };
 
-  const renderPlaceCards = (type) => {
-    return places
-      .filter(place => place.type === type)
-      .slice(0, 5)
-      .map(place => (
-        <Link to={`/places/${place._id}`} key={place._id} style={{ textDecoration: "none", color: "inherit" }}>
-          <Card
-            hoverable
-            style={{ width: 300, margin: 20 }}
-            cover={<img alt={place.name} src={place.imageUrl} />}
-          >
-            
-            <Flex gap="small" wrap="wrap" style={{ justifyContent: 'flex-end' }}>
-            </Flex>
-          </Card>
-        </Link>
-      ));
+  const renderPlaceCards = () => {
+    return (
+      <React.Fragment>
+        <Card
+          hoverable
+          style={{ width: 300, margin: 20 }}
+          cover={<img alt="Cultural" src="https://www.meisterdrucke.lu/kunstwerke/1260px/Sandro_Botticelli_-_Venus_-_%28MeisterDrucke-686929%29.jpg" style={{ height: 200, objectFit: 'cover' }} />} 
+        >
+          <Meta title="Art&Culture" description="Description of cultural place" />
+        </Card>
+        <Card
+          hoverable
+          style={{ width: 300, margin: 20 }}
+          cover={<img alt="Food&Wine" src="https://t3.ftcdn.net/jpg/02/39/91/54/360_F_239915415_3o2mMjkYZNrSsvyKWQaFuw9GYOs9OzzH.jpg" style={{ height: 200, objectFit: 'cover' }}/>} // Replace villages.jpg with your image URL
+        >
+          <Meta title="Food&Wine" description="Description of villages place" />
+        </Card>
+        <Card
+          hoverable
+          style={{ width: 300, margin: 20 }}
+          cover={<img alt="Villages" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/positano-fishing-village-amalfi-coast-campania-italy-20170918-v2-vertical-wingsdomain-art-and-photography.jpg" style={{ height: 200, objectFit: 'cover' }} />} // Replace cultural.jpg with your image URL
+        >
+          <Meta title="Villages" description="Description of cultural place" />
+        </Card>
+        <Card
+          hoverable
+          style={{ width: 300, margin: 20 }}
+          cover={<img alt="Nature" src="https://handluggageonly.co.uk/wp-content/uploads/2018/09/Hand-Luggage-Only-15-4.jpg" style={{ height: 200, objectFit: 'cover' }}/>} // Replace cultural.jpg with your image URL
+        >
+          <Meta title="Nature" description="Description of cultural place" />
+        </Card>
+        <Card
+          hoverable
+          style={{ width: 300, margin: 20 }}
+          cover={<img alt="Relax&Wellness" src="https://domusdejanas.com/wp-content/uploads/2015/02/centrospa.jpg" style={{ height: 200, objectFit: 'cover' }} />} // Replace cultural.jpg with your image URL
+        >
+          <Meta title="Relax&Wellness" description="Description of cultural place" />
+        </Card>
+      </React.Fragment>
+    );
   };
-  
 // carrousel & links to revise
   return (
     <div>
@@ -199,9 +222,7 @@ function HomePage() {
       <div>
         <h2>Getting inspiration</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {renderPlaceCards("Cultural")}
-          {renderPlaceCards("Villages")}
-          {/* Render cards for other types of places as needed */}
+          {renderPlaceCards()}
         </div>
       </div>
     </div>
