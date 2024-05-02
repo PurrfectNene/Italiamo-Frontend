@@ -34,11 +34,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   return (
-    <Flex
-      component="main"
-      vertical
-      style={{ minHeight: "calc(100svh - 60px)" }}
-    >
+    <Flex component="main" vertical style={{ minHeight: "100svh" }}>
       <Row style={{ flex: 1 }}>
         <Col
           xs={0}
@@ -53,7 +49,7 @@ export default function LoginPage() {
         <Col
           xs={24}
           lg={12}
-          className="background-pattern"
+          // className="background-pattern"
           style={{
             minHeight: "100%",
             padding: "2rem",

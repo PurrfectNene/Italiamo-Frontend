@@ -1,12 +1,16 @@
 import { Flex, Space } from "antd";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "./Navbar.css";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
+  const { pathname } = useLocation();
+  if (pathname === "/login" || pathname === "/register") {
+    return null;
+  }
   // const items = [
   //   {
   //     key: 0,
@@ -24,7 +28,7 @@ export default function Navbar() {
       style={{
         minHeight: 60,
         backgroundColor: "white",
-        boxShadow: "0 2px 4px -1px rgba(57,76,96,.15)",
+        // boxShadow: "0 2px 4px -1px rgba(57,76,96,.15)",
         zIndex: 100,
         position: "relative",
         alignItems: "center",
@@ -53,7 +57,7 @@ export default function Navbar() {
         className="roboto-slab"
         style={{
           fontSize: "2rem",
-          color: "#5f4e44",
+          color: "black",
         }}
       >
          <img src="/italiamo-black.png" alt="Logo Italiamo" width="50" height="auto" />
@@ -103,7 +107,7 @@ export default function Navbar() {
               display: "flex",
               gap: "0.75rem",
               fontSize: "1.25rem",
-              color: "#5f4e44",
+              color: "black",
               padding: "0.5rem",
               height: "auto",
             }}
@@ -124,7 +128,7 @@ export default function Navbar() {
                 display: "flex",
                 gap: "0.75rem",
                 fontSize: "1.25rem",
-                color: "#5f4e44",
+                color: "black",
                 padding: "0.5rem",
                 height: "auto",
               }}
