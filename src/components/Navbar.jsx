@@ -7,6 +7,7 @@ import "./Navbar.css";
 export default function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
+
   const { pathname } = useLocation();
 
   if (pathname === "/dashboard") {

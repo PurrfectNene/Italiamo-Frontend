@@ -11,6 +11,7 @@ import RegionDetailsPage from "./pages/RegionDetailsPage";
 import AllCitiesPage from "./pages/AllCitiesPage";
 import CityDetailsPage from "./pages/CityDetailsPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
+import AllPlacesPage from "./pages/AllPlacesPage";
 import Footer from "./components/Footer";
 import UserPage from "./pages/UserPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
@@ -29,11 +30,9 @@ function App() {
         <Route exact path="/cities" element={<AllCitiesPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
-        <Route
-          exact
-          path="/cities/:cityId/places/:placeId"
-          element={<PlaceDetailsPage />}
-        />
+        <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />} />
+        <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} /> 
+        <Route exact path="/places/allplaces" element={<AllPlacesPage />} />
         <Route
           exact
           path="/profile"
