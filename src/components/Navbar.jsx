@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
   const { pathname } = useLocation();
 
@@ -71,11 +71,16 @@ export default function Navbar() {
       >
         {isLoggedIn ? (
           <>
-            <Link className="menu-link" to="/login">
-              Login
+            <Link className="menu-link" to="/profile">
+              Profile
             </Link>
-            <Link className="menu-link" to="/register">
-              Create account
+            <Link
+              className="menu-link"
+              onClick={() => {
+                logOutUser();
+              }}
+            >
+              Logout
             </Link>
           </>
         ) : (
