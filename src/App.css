@@ -25,3 +25,7 @@ body {
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
