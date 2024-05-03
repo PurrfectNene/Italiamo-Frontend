@@ -256,25 +256,28 @@ function RegionDetailsPage() {
               >
                 {cities.map((city) => (
                   <div key={city._id}>
-                    <img
-                      src={city.imageUrl}
-                      style={{
-                        height: "280px",
-                        width: "100%",
+                    <Link to={`/cities/${city._id}`}>
+                      <img
+                        src={city.imageUrl}
+                        style={{
+                          height: "280px",
+                          width: "100%",
 
-                        borderRadius: "0.5rem",
-                        borderBottomRightRadius: 0,
-                        borderBottomLeftRadius: 0,
-                      }}
-                    />
-                    <div
+                          borderRadius: "0.5rem",
+                          borderBottomRightRadius: 0,
+                          borderBottomLeftRadius: 0,
+                        }}
+                      />
+                    </Link>
+                    <Link
+                      to={`/cities/${city._id}`}
                       style={{
+                        display: "block",
                         height: "120px",
                         padding: "1rem",
                       }}
                     >
-                      <Link
-                        to={`/cities/${city._id}`}
+                      <span
                         style={{
                           fontSize: "1.35rem",
                           color: "black",
@@ -282,11 +285,14 @@ function RegionDetailsPage() {
                         }}
                       >
                         {city.name}
-                      </Link>
-                      <p style={{ margin: 0 }} className="clamp-2">
+                      </span>
+                      <p
+                        style={{ margin: 0, color: "black" }}
+                        className="clamp-2"
+                      >
                         {city.description}
                       </p>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </Carousel>
