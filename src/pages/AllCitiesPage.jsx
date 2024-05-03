@@ -86,7 +86,7 @@ function AllCitiesPage() {
               cover={<img alt={city.name} src={city.imageUrl} />}
             >
               <Link
-                to={`/regions/${city.region._id}`}
+                to={`/cities/${city._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <Meta
@@ -107,10 +107,6 @@ function AllCitiesPage() {
               </Flex>
             </Card>
           );
-          {
-            /*           </Link>
-             */
-          }
         })}
       </div>
     </div>
