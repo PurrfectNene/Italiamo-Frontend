@@ -185,7 +185,6 @@ export default function useCitiesTable(state) {
       showSorterTooltip: { target: "full-header" },
       sorter: (a, b) => a.region.name.localeCompare(b.region.name),
       sortDirections: ["descend", "ascend"],
-      editable: true,
     },
     {
       title: "Description",

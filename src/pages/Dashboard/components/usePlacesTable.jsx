@@ -187,7 +187,6 @@ export default function usePlacesTable(state) {
       ...getColumnSearchProps("type"),
       sorter: (a, b) => a.type.localeCompare(b.type),
       sortDirections: ["descend", "ascend"],
-      editable: true,
     },
     {
       title: "City",
@@ -197,7 +196,6 @@ export default function usePlacesTable(state) {
       showSorterTooltip: { target: "full-header" },
       sorter: (a, b) => a.city.name.localeCompare(b.city.name),
       sortDirections: ["descend", "ascend"],
-      editable: true,
     },
     {
       title: "Description",
