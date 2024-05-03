@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 
-export default function useCitiesTable(state) {
+export default function usePlacesTable(state) {
   const [form] = Form.useForm();
   const [data, setData] = state;
   const [searchText, setSearchText] = useState("");
@@ -15,7 +15,8 @@ export default function useCitiesTable(state) {
   const edit = (record) => {
     form.setFieldsValue({
       name: "",
-      region: "",
+      type: "",
+      city: "",
       description: "",
       imageUrl: "",
       ...record,
@@ -35,7 +36,7 @@ export default function useCitiesTable(state) {
 
       // Send post request to save in backend
       await axios
-        .put(`${import.meta.env.VITE_API_URL}/api/cities/${key}`, row, {
+        .put(`${import.meta.env.VITE_API_URL}/api/places/${key}`, row, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then(() => {
@@ -67,7 +68,7 @@ export default function useCitiesTable(state) {
 
       // Send post request to save in backend
       await axios
-        .delete(`${import.meta.env.VITE_API_URL}/api/cities/${key}`, {
+        .delete(`${import.meta.env.VITE_API_URL}/api/places/${key}`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then(() => {
@@ -178,12 +179,23 @@ export default function useCitiesTable(state) {
       editable: true,
     },
     {
-      title: "Region",
-      dataIndex: ["region", "name"],
-      key: "region",
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
       width: "15%",
       showSorterTooltip: { target: "full-header" },
-      sorter: (a, b) => a.region.name.localeCompare(b.region.name),
+      ...getColumnSearchProps("type"),
+      sorter: (a, b) => a.type.localeCompare(b.type),
+      sortDirections: ["descend", "ascend"],
+      editable: true,
+    },
+    {
+      title: "City",
+      dataIndex: ["city", "name"],
+      key: "city",
+      width: "15%",
+      showSorterTooltip: { target: "full-header" },
+      sorter: (a, b) => a.city.name.localeCompare(b.city.name),
       sortDirections: ["descend", "ascend"],
       editable: true,
     },
@@ -191,7 +203,7 @@ export default function useCitiesTable(state) {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: "30%",
+      width: "25%",
       showSorterTooltip: { target: "full-header" },
       ...getColumnSearchProps("description"),
       sorter: (a, b) => a.description.localeCompare(b.description),
@@ -201,7 +213,7 @@ export default function useCitiesTable(state) {
     {
       title: "Image",
       dataIndex: "imageUrl",
-      width: "20%",
+      width: "15%",
       key: "imageUrl",
       ...getColumnSearchProps("imageUrl"),
       showSorterTooltip: { target: "full-header" },
@@ -211,7 +223,7 @@ export default function useCitiesTable(state) {
     },
     {
       title: "Actions",
-      width: "20%",
+      width: "15%",
       dataIndex: "operation",
       render: (_, record) => {
         const editable = isEditing(record);
