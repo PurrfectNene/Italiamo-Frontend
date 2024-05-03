@@ -115,14 +115,16 @@ function CityDetailsPage() {
               padding: "1.25rem",
             }}
           >
-            <Link to={`/places/${places?.[selectedPlace]?._id}`}>
-              <img
-                src={places?.[selectedPlace]?.imageUrl}
-                width="100%"
-                height="200px"
-                style={{ borderRadius: "0.5rem" }}
-              />
-            </Link>
+            {places?.[selectedPlace]?._id && (
+              <Link to={`/places/${places?.[selectedPlace]?._id}`}>
+                <img
+                  src={places?.[selectedPlace]?.imageUrl}
+                  width="100%"
+                  height="200px"
+                  style={{ borderRadius: "0.5rem" }}
+                />
+              </Link>
+            )}
             <h1
               style={{
                 marginTop: "0.25rem",
