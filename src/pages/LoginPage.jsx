@@ -1,7 +1,7 @@
 import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
 import axios from "axios";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "./LoginPage.css";
 
@@ -69,6 +69,23 @@ export default function LoginPage() {
               position: "relative",
             }}
           >
+            <Link
+              to="/"
+              className="roboto-slab"
+              style={{
+                fontSize: "2rem",
+                filter:
+                  "invert(52%) sepia(10%) saturate(955%) hue-rotate(340deg) brightness(91%) contrast(85%)",
+              }}
+            >
+              <img
+                src="/italiamo-black.png"
+                alt="Logo Italiamo"
+                width="100"
+                height="auto"
+                style={{}}
+              />
+            </Link>
             <Title
               level={1}
               style={{
@@ -77,6 +94,7 @@ export default function LoginPage() {
                 fontSize: "2.75rem",
                 fontWeight: "bolder",
                 marginBottom: 0,
+                marginTop: 0,
               }}
             >
               Welcome Back!

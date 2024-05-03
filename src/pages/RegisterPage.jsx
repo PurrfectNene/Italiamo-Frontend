@@ -1,7 +1,7 @@
 import { Button, Col, Flex, Form, Input, Row, Typography } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Text, Title } = Typography;
 
@@ -26,7 +26,7 @@ export default function RegisterPage() {
         console.log(createdUser);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setServerErrorMessage(err?.response?.data?.message);
       });
   }
@@ -67,6 +67,24 @@ export default function RegisterPage() {
               position: "relative",
             }}
           >
+            {" "}
+            <Link
+              to="/"
+              className="roboto-slab"
+              style={{
+                fontSize: "2rem",
+                filter:
+                  "invert(52%) sepia(10%) saturate(955%) hue-rotate(340deg) brightness(91%) contrast(85%)",
+              }}
+            >
+              <img
+                src="/italiamo-black.png"
+                alt="Logo Italiamo"
+                width="100"
+                height="auto"
+                style={{}}
+              />
+            </Link>
             <Title
               level={1}
               style={{
@@ -75,6 +93,7 @@ export default function RegisterPage() {
                 fontSize: "2.75rem",
                 fontWeight: "bolder",
                 marginBottom: 0,
+                marginTop: 0,
               }}
             >
               Welcome to Italiamo!
