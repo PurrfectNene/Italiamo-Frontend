@@ -72,7 +72,7 @@ function AllRegionsPage() {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
         }}
       >
         {regions.map((region) => (

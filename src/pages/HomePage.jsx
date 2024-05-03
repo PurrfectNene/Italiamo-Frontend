@@ -242,7 +242,7 @@ function HomePage() {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
           {regions.map((region) => (
@@ -277,7 +277,7 @@ function HomePage() {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
           {cities.map((city) => (
@@ -321,7 +321,7 @@ function HomePage() {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
           {renderPlaceCards()}
