@@ -5,7 +5,7 @@ import CitiesPage from "./pages/CitiesPage";
 import PlacesPage from "./pages/PlacesPage";
 import RegionsPage from "./pages/RegionsPage";
 
-const { Text, Title, Paragraph } = Typography;
+const { Text } = Typography;
 
 const items = [
   {

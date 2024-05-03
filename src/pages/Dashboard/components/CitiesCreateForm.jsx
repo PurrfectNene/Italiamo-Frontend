@@ -1,23 +1,22 @@
 import { InboxOutlined } from "@ant-design/icons";
-import { Form, Input, Modal, Upload, message } from "antd";
+import { Form, Input, Modal, Select, Upload, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
 import { useState } from "react";
 
 const { Dragger } = Upload;
 
-export default function RegionsCreateModal({ state }) {
+export default function CitiesCreateModal({ state, regionsList }) {
   const [isModalOpen, setIsModalOpen] = state;
-  const [createRegionForm] = Form.useForm();
+  const [createCityForm] = Form.useForm();
   const [imageUrlState, setImageUrlState] = useState("");
 
   const handleOk = async () => {
-    const data = createRegionForm.getFieldsValue();
+    const data = createCityForm.getFieldsValue();
     const storedToken = localStorage.getItem("authToken");
 
-    console.log(data);
     await axios
-      .post(`${import.meta.env.VITE_API_URL}/api/regions`, data, {
+      .post(`${import.meta.env.VITE_API_URL}/api/cities`, data, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((res) => {
@@ -29,7 +28,7 @@ export default function RegionsCreateModal({ state }) {
   };
 
   const handleCancel = () => {
-    createRegionForm.resetFields();
+    createCityForm.resetFields();
     setIsModalOpen(false);
   };
 
@@ -42,7 +41,7 @@ export default function RegionsCreateModal({ state }) {
         // console.log(info.file, info.fileList);
         if (info.fileList.length === 0) {
           // is deleting
-          createRegionForm.setFieldValue("imageUrl", "");
+          createCityForm.setFieldValue("imageUrl", "");
           setImageUrlState("");
         }
       }
@@ -67,7 +66,7 @@ export default function RegionsCreateModal({ state }) {
         const res = await axios
           .post(`${import.meta.env.VITE_API_URL}/api/upload`, fmData, config)
           .then((res) => {
-            createRegionForm.setFieldValue("imageUrl", res.data.fileUrl);
+            createCityForm.setFieldValue("imageUrl", res.data.fileUrl);
             setImageUrlState(res.data.fileUrl);
           });
 
@@ -86,7 +85,7 @@ export default function RegionsCreateModal({ state }) {
         <Form style={{ display: "none" }} form={createRegionForm} />
       )} */}
       <Modal
-        title="Create Region"
+        title="Create City"
         open={isModalOpen}
         onOk={handleOk}
         okText="Create"
@@ -94,9 +93,17 @@ export default function RegionsCreateModal({ state }) {
         forceRender
         getContainer={false}
       >
-        <Form form={createRegionForm} layout="vertical">
+        <Form form={createCityForm} layout="vertical">
           <Form.Item label="Name" name="name" style={{ marginBottom: 12 }}>
             <Input />
+          </Form.Item>
+          <Form.Item label="Region" name="region" style={{ marginBottom: 12 }}>
+            <Select
+              options={regionsList.map((region) => ({
+                label: region.name,
+                value: region._id,
+              }))}
+            />
           </Form.Item>
           <Form.Item
             label="Description"
