@@ -273,7 +273,13 @@ function HomePage() {
 
       <div>
         <h2>Cities</h2>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
           {cities.map((city) => (
             <Link
               to={`/cities/${city._id}`}
@@ -311,7 +317,13 @@ function HomePage() {
 
       <div>
         <h2>Getting inspiration</h2>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
           {renderPlaceCards()}
         </div>
       </div>
