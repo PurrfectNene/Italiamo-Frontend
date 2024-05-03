@@ -41,10 +41,10 @@ export default function Navbar() {
         size={"large"}
       >
         <Link className="menu-link" to="/regions">
-          Where to go
+          Regions
         </Link>
         <Link className="menu-link" to="/cities">
-          What to do
+          Cities
         </Link>
       </Space>
       <Link
@@ -90,7 +90,7 @@ export default function Navbar() {
               Login
             </Link>
             <Link className="menu-link" to="/register">
-              Create account
+              Register
             </Link>
           </>
         )}
