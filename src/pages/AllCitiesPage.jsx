@@ -1,7 +1,7 @@
+import { Button, Card, Flex } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Button, Flex } from "antd";
 const { Meta } = Card;
 
 function AllCitiesPage() {
@@ -65,9 +65,15 @@ function AllCitiesPage() {
           which Italy is famous worldwide.
         </p>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
         {cities.map((city) => {
-          console.log(city)
+          console.log(city);
           {
             /*           <Link to={`/cities/${city._id}`} key={city._id} style={{ textDecoration: "none", color: "inherit" }}>
              */
@@ -77,12 +83,7 @@ function AllCitiesPage() {
               key={city._id}
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={
-                <img
-                  alt={city.name}
-                  src={city.imageUrl}
-                />
-              }
+              cover={<img alt={city.name} src={city.imageUrl} />}
             >
               <Link
                 to={`/regions/${city.region._id}`}
