@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
-import AllRegionsPage from "./pages/AllRegionsPage"
+import AllRegionsPage from "./pages/AllRegionsPage";
 import RegionDetailsPage from "./pages/RegionDetailsPage";
 import AllCitiesPage from "./pages/AllCitiesPage";
 import CityDetailsPage from "./pages/CityDetailsPage";
@@ -30,8 +30,12 @@ function App() {
         <Route exact path="/cities" element={<AllCitiesPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
-        <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />} />
-        <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} /> 
+        <Route
+          exact
+          path="/cities/:cityId/places/:placeId"
+          element={<PlaceDetailsPage />}
+        />
+        <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} />
         <Route exact path="/places/allplaces" element={<AllPlacesPage />} />
         <Route
           exact

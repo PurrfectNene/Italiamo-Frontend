@@ -1,4 +1,5 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 import { useState, useContext } from "react";
 import { AuthContext } from '../context/auth.context';
@@ -7,7 +8,8 @@ function ProfileImgPage() {
     const [imageUrl, setImageUrl] = useState("");
     const [error, setError] = useState(null);
 
-    const {user} = useContext(AuthContext)
+    const navigate = useNavigate()
+    const {user, authenticateUser} = useContext(AuthContext)
   
     const handleFileUpload = (e) => {
       console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -17,7 +19,7 @@ function ProfileImgPage() {
       uploadData.append("imageUrl", e.target.files[0]);
   
       axios
-        .post(`${import.meta.env.VITE_API_URL}`/api/upload, uploadData)
+        .post(`${import.meta.env.VITE_API_URL}/api/upload`, uploadData)
         .then((response) => {
           console.log(response.data.fileUrl);
           setImageUrl(response.data.fileUrl);
@@ -36,6 +38,8 @@ function ProfileImgPage() {
       axios.post(`${import.meta.env.VITE_API_URL}/api/profile/image`,{_id:user._id,imageUrl})
       .then(response=>{
         console.log(response.data)
+        navigate('/profile')
+    
       })
     }
   
