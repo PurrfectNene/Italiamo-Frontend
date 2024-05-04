@@ -1,0 +1,8 @@
+.menu-link {
+    color: black;
+}
+
+.menu-link:hover{
+    color: black;
+     text-decoration: underline;
+}
