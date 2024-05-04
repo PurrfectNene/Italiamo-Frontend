@@ -1,26 +1,27 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer";
+import IsPrivate from "./components/IsPrivate";
 import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
+import AllCitiesPage from "./pages/AllCitiesPage";
+import AllPlacesPage from "./pages/AllPlacesPage";
+import AllRegionsPage from "./pages/AllRegionsPage";
+import CityDetailsPage from "./pages/CityDetailsPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import IsAnon from "./components/IsAnon";
-import IsPrivate from "./components/IsPrivate";
-import AllRegionsPage from "./pages/AllRegionsPage";
-import RegionDetailsPage from "./pages/RegionDetailsPage";
-import AllCitiesPage from "./pages/AllCitiesPage";
-import CityDetailsPage from "./pages/CityDetailsPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
-import AllPlacesPage from "./pages/AllPlacesPage";
-import Footer from "./components/Footer";
-import UserPage from "./pages/UserPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
-import DashboardPage from "./pages/Dashboard/DashboardPage";
+import RegionDetailsPage from "./pages/RegionDetailsPage";
+import RegisterPage from "./pages/RegisterPage";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/login" element={<LoginPage />} />

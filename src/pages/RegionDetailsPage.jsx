@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import GoogleMap from "../components/GoogleMap";
+import Loading from "../components/Loading";
 import PlaceCard from "../components/PlaceCard";
 import "./RegionDetailsPage.css";
 
@@ -47,7 +48,7 @@ function RegionDetailsPage() {
   }, [id]);
 
   if (!region) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -184,7 +185,7 @@ function RegionDetailsPage() {
           <Wrapper
             apiKey={import.meta.env.VITE_GOOGLEAPIKEY}
             render={() => {
-              return <p>Loading...</p>;
+              return <Loading />;
             }}
           >
             <GoogleMap />

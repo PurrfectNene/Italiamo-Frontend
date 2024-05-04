@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import LazyReviewList from "../components/LazyReviewList";
 import NewReview from "../components/NewReview";
 import PlaceHoverableCard from "../components/PlaceHoverableCard";
+import Loading from "../components/Loading";
 
 function CityDetailsPage() {
   function calculateReviewsAverage(reviews) {
@@ -58,7 +59,7 @@ function CityDetailsPage() {
   }, [id, reviews]);
 
   if (!city) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <div
