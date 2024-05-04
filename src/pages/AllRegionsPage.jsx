@@ -84,7 +84,7 @@ function AllRegionsPage() {
             <Card
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={<img alt={region.name} src={region.imageUrl} />}
+              cover={<img alt={region.name} src={region.imageUrl} style={{ width: "100%", height: "200px", objectFit: "cover" }}/>}
             >
               <Meta
                 title={region.name}

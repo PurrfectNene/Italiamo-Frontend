@@ -83,7 +83,7 @@ function AllCitiesPage() {
               key={city._id}
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={<img alt={city.name} src={city.imageUrl} />}
+              cover={<img alt={city.name} src={city.imageUrl} style={{ width: "100%", height: "200px", objectFit: "cover" }}/>}
             >
               <Link
                 to={`/cities/${city._id}`}
@@ -103,7 +103,7 @@ function AllCitiesPage() {
                 style={{ justifyContent: "flex-end" }}
               >
                 <Button>Add to favourite</Button>
-                <Button type="link">What to see</Button>
+                <Button type="link">Read more</Button>
               </Flex>
             </Card>
           );

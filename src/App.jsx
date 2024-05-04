@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import UserPage from "./pages/UserPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
+import NewsletterBanner from "./components/NewsletterBanner"
 
 function App() {
   return (
