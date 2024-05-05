@@ -35,11 +35,18 @@ function ProfileImgPage() {
 
     function updatePicture(){
 
+      if(!imageUrl){
+        setError("Please, upload a picture to submit.")
+        return
+      }
+
       axios.post(`${import.meta.env.VITE_API_URL}/api/profile/image`,{_id:user._id,imageUrl})
       .then(response=>{
         console.log(response.data)
         navigate('/profile')
-    
+      })
+      .catch((err)=>{
+        setError(err);
       })
     }
   
