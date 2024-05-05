@@ -1,14 +1,42 @@
-import { Col, Row } from "antd";
+import { Col, Drawer, Rate, Row } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import LazyReviewList from "../components/LazyReviewList";
+import NewReview from "../components/NewReview";
 import PlaceHoverableCard from "../components/PlaceHoverableCard";
+import Loading from "../components/Loading";
 
 function CityDetailsPage() {
+  function calculateReviewsAverage(reviews) {
+    if (!reviews) {
+      return 0;
+    }
+
+    const totalReviews = reviews.length;
+    const sumReviews = reviews.reduce((accumulated, reviewObj) => {
+      return accumulated + reviewObj.rating;
+    }, 0);
+
+    return sumReviews / totalReviews;
+  }
+
+  // stores the reviews of the CURRENTLY SELECTED PLACE
+  const [reviews, setReviews] = useState(null);
+
   const { id } = useParams();
   const [city, setCity] = useState(null);
   const [places, setPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     axios
@@ -28,10 +56,10 @@ function CityDetailsPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [id, reviews]);
 
   if (!city) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <div
@@ -123,24 +151,47 @@ function CityDetailsPage() {
             }}
           >
             {places?.[selectedPlace]?._id && (
-              <Link to={`/places/${places?.[selectedPlace]?._id}`}>
-                <img
-                  src={places?.[selectedPlace]?.imageUrl}
-                  width="100%"
-                  height="200px"
-                  style={{ borderRadius: "0.5rem" }}
-                />
-              </Link>
+              <img
+                src={places?.[selectedPlace]?.imageUrl}
+                width="100%"
+                height="200px"
+                style={{ borderRadius: "0.5rem" }}
+              />
             )}
-            <h1
-              style={{
-                marginTop: "0.25rem",
-                marginBottom: 0,
-                fontSize: "1.5rem",
-              }}
-            >
-              {places?.[selectedPlace]?.name}
-            </h1>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h1
+                style={{
+                  marginTop: "0",
+                  marginBottom: 0,
+                  fontSize: "1.5rem",
+                }}
+              >
+                {places?.[selectedPlace]?.name}
+              </h1>
+              <a
+                style={{
+                  display: "block",
+                  marginLeft: "auto",
+                  padding: "0.25rem",
+                }}
+                className="force-pointer"
+                onClick={showDrawer}
+              >
+                <Rate
+                  disabled
+                  value={calculateReviewsAverage(
+                    places?.[selectedPlace]?.reviews
+                  )}
+                  style={{
+                    fontSize: "1rem",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                />
+              </a>
+            </div>
+
             <span style={{ color: "#797979" }}>
               {places?.[selectedPlace]?.type}
             </span>
@@ -148,6 +199,34 @@ function CityDetailsPage() {
               {places?.[selectedPlace]?.description}
             </p>
           </Col>
+          <Drawer
+            title={places?.[selectedPlace]?.name + " Reviews"}
+            onClose={onClose}
+            open={open}
+            styles={{
+              body: {
+                display: "flex",
+                flexDirection: "column",
+              },
+            }}
+          >
+            <LazyReviewList
+              placeId={places?.[selectedPlace]?._id}
+              load={open}
+              state={[reviews, setReviews]}
+            />
+            <div
+              style={{
+                marginTop: "auto",
+                paddingTop: "0.5rem",
+              }}
+            >
+              <NewReview
+                placeId={places?.[selectedPlace]?._id}
+                state={[reviews, setReviews]}
+              />
+            </div>
+          </Drawer>
         </Row>
       </article>
     </div>

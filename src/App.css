@@ -40,3 +40,14 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+
+.force-pointer:hover {
+  cursor:pointer!important;
+}
+
+.force-pointer:hover *:hover {
+  cursor:pointer!important;
+}
+
