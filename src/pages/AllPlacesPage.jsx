@@ -8,7 +8,7 @@ function AllPlacesPage() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/places`) // Fetch all places
+      .get(`${import.meta.env.VITE_API_URL}/api/places`) 
       .then((response) => {
         setPlaces(response.data);
       })
@@ -16,6 +16,7 @@ function AllPlacesPage() {
         console.log(err);
       });
   }, []);
+
 
   const truncateDescription = (description) => {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
@@ -91,11 +92,21 @@ function AllPlacesPage() {
           Discover the beauty and uniqueness of all places in Italy.
         </p>
       </div>
-      {renderPlacesByType("Cultural")}
-      {renderPlacesByType("Food&Wine")}
+      <div id="cultural">
+        {renderPlacesByType("Cultural")}
+      </div>
+      <div id="food&wine">
+        {renderPlacesByType("Food&Wine")}
+      </div>
+      <div id="relax&wellness">
       {renderPlacesByType("Relax&Wellness")}
+      </div>
+      <div id="villages">
       {renderPlacesByType("Villages")}
+      </div>
+      <div id="nature">
       {renderPlacesByType("Nature")}
+      </div>
     </div>
   );
 }
