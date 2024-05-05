@@ -16,6 +16,11 @@ import Footer from "./components/Footer";
 import UserPage from "./pages/UserPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
+import CulturalPlacesPage from "./pages/CulturalPlacesPage";
+import FoodAndWinePlacesPage from "./pages/FoodAndWinePlacesPage"
+import NaturePlacesPage from "./pages/NaturePlacesPage"
+import VillagesPlacesPage from "./pages/VillagesPlacesPage"
+import RelaxWellnessPlacesPage from "./pages/RelaxWellnessPlacesPage"
 import NewsletterBanner from "./components/NewsletterBanner"
 
 function App() {
@@ -38,6 +43,16 @@ function App() {
         />
         <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} />
         <Route exact path="/places/allplaces" element={<AllPlacesPage />} />
+        <Route exact path="/places/cultural" element={<CulturalPlacesPage />} />
+        <Route exact path="/places/food&wine" element={<FoodAndWinePlacesPage />} />
+        <Route exact path="/places/nature" element={<NaturePlacesPage />} />
+        <Route exact path="/places/villages" element={<VillagesPlacesPage />} />
+        <Route exact path="/places/relax&wellness" element={<RelaxWellnessPlacesPage />} />
+
+
+
+
+
         <Route
           exact
           path="/profile"

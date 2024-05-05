@@ -68,6 +68,13 @@ function CityDetailsPage() {
           style={{
             width: "100%",
             maxWidth: 1200,
+            alignItems: "center",
+          }}
+        >{city.description}</Row>
+        <Row
+          style={{
+            width: "100%",
+            maxWidth: 1200,
             marginTop: "1rem",
             gap: "1rem",
             flex: 1,

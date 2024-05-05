@@ -38,7 +38,7 @@ function UserPage() {
         <p>{email}</p>
       </div>
       <div>
-        <FavouritesList/>
+        <FavouritesList favoritesRegions={fetchedUser.favoritesRegions}/>
       </div>
       </div>
     )}

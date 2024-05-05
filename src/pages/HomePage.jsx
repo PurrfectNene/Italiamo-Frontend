@@ -73,16 +73,12 @@ function HomePage() {
 
   const renderPlaceCards = () => {
 
-    const redirectToAllPlaces = (section) => {
-      window.location.href = `/places/allplaces#${section.toLowerCase()}`;
-    };
-
     return (
       <React.Fragment>
+      <Link to={{pathname:'/places/cultural'}} style={{textDecoration: "none"}}>
         <Card
           hoverable
           style={{ width: 200, margin: 20 }}
-          onClick={() => redirectToAllPlaces("Cultural")}
           cover={
             <img
               alt="Cultural"
@@ -96,10 +92,11 @@ function HomePage() {
             description="Explore Italy's Cultural Wonders: Where Every Place Tells a Story of Beauty and History."
           />
         </Card>
+        </Link>
+        <Link to={{pathname:'/places/food&wine'}} style={{textDecoration: "none"}}>
         <Card
           hoverable
           style={{ width: 200, margin: 20 }}
-          onClick={() => redirectToAllPlaces("Food&Wine")}
           cover={
             <img
               alt="Food&Wine"
@@ -110,10 +107,11 @@ function HomePage() {
         >
           <Meta title="Food&Wine" description="Indulge in Italy's flavorful symphony: Taste the Passion, Savor the Tradition" />
         </Card>
+        </Link>
+        <Link to={{pathname:'/places/villages'}} style={{textDecoration: "none"}}>
         <Card
           hoverable
           style={{ width: 200, margin: 20 }}
-          onClick={() => redirectToAllPlaces("Villages")}
           cover={
             <img
               alt="Villages"
@@ -124,10 +122,11 @@ function HomePage() {
         >
           <Meta title="Villages" description="Step into Italy's Timeless Charm: Where Every Village Tells a Story of Tradition and Warmth." />
         </Card>
+        </Link>
+        <Link to={{pathname:'/places/nature'}} style={{textDecoration: "none"}}>
         <Card
           hoverable
           style={{ width: 200, margin: 20 }}
-          onClick={() => redirectToAllPlaces("Nature")}
           cover={
             <img
               alt="Nature"
@@ -138,10 +137,11 @@ function HomePage() {
         >
           <Meta title="Nature" description="Embrace Italy's Natural Splendor: Where beauty blooms and serenity flourishes." />
         </Card>
+        </Link>
+        <Link to={{pathname:'/places/relax&wellness'}} style={{textDecoration: "none"}}>
         <Card
           hoverable
           style={{ width: 200, margin: 20 }}
-          onClick={() => redirectToAllPlaces("Relax&Wellness")}
           cover={
             <img
               alt="Relax&Wellness"
@@ -155,14 +155,14 @@ function HomePage() {
             description="Revel in Italy's Tranquil Retreats: Renew Your Soul in the Heart of Relaxation."
           />
         </Card>
+        </Link>
       </React.Fragment>
     );
   };
 
   return (
     <div>
-{/*        <iframe width="100%" height="1000" src="https://www.youtube.com/embed/fSbB5PQRlZ8?si=wiHCfG8ysUDSyRFN?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- */} 
+
      <div>
          <video autoPlay loop muted width="100%" height="auto">
           <source src="/Video.mp4" type="video/mp4" />
@@ -268,7 +268,7 @@ function HomePage() {
                 />
                 <br></br>
                 <Flex gap="small" wrap="wrap">
-                  <Button type="link">Read more</Button>
+                  <Button type="link" style={{ color: "#5F4E44" }}>Read more</Button>
                 </Flex>
               </Card>
             </Link>
@@ -339,8 +339,17 @@ function HomePage() {
         >
           {renderPlaceCards()}
         </div>
+       
+<div style={{ marginBottom: "50px" }}>
+  <Link to="/places/allplaces" style={{ textDecoration: "none" }}>
+    <Button type="primary" style={{ background: "#927766" }}>
+      Discover all places
+    </Button>
+  </Link>
+</div>
+
+
       </div>
-      <Link  to={{pathname:'/places/allplaces',hash:"#marta"}}>Go to Msrta Section</Link>
     </div>
   );
 }

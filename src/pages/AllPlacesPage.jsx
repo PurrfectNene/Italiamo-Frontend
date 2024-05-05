@@ -107,9 +107,6 @@ function AllPlacesPage() {
       <div id="nature">
       {renderPlacesByType("Nature")}
       </div>
-        <div id='marta'>
-            Marta
-        </div>
     </div>
   );
 }

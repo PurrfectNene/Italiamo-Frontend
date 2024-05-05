@@ -1,10 +1,14 @@
 import { Button, Card, Flex } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
+import { AuthContext } from "../context/auth.context";
+
 
 function AllCitiesPage() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
@@ -73,11 +77,7 @@ function AllCitiesPage() {
         }}
       >
         {cities.map((city) => {
-          console.log(city);
-          {
-            /*           <Link to={`/cities/${city._id}`} key={city._id} style={{ textDecoration: "none", color: "inherit" }}>
-             */
-          }
+
           return (
             <Card
               key={city._id}
@@ -93,17 +93,24 @@ function AllCitiesPage() {
                   title={city.name}
                   description={truncateDescription(city.description)}
                 />
+                </Link>
+                <Link to={`/regions/${city.region._id}`} style={{ textDecoration: "none", color: "#5F4E44" }}>
                 <p style={{ margin: "10px 0", fontWeight: "bold" }}>
                   {city.region.name}
                 </p>
-              </Link>
+                </Link>
               <Flex
                 gap="small"
                 wrap="wrap"
                 style={{ justifyContent: "flex-end" }}
               >
-                <Button>Add to favourite</Button>
-                <Button type="link">Read more</Button>
+                {isLoggedIn && <Button>Add to favourite</Button>}
+                <Link
+                to={`/cities/${city._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Button type="link"  style={{ color: "#5F4E44" }}>Read more</Button>
+                </Link>
               </Flex>
             </Card>
           );
