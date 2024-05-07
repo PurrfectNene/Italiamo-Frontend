@@ -5,7 +5,7 @@ import "./ProfilePage.css";
 // import Link from "antd/es/typography/Link";
 import axios from "axios";
 import Loading from "../../components/Loading";
-import UploadPictureInput from "./UploadPictureInput";
+import CropImage from "./CropImage";
 
 function ProfilePage() {
   const [fetchedUser, setFetchedUser] = useState(null);
@@ -55,7 +55,7 @@ function ProfilePage() {
               alt={`Profile Picture`}
             />
           </div>
-          <UploadPictureInput />
+          <CropImage />
 
           <div>
             <FavouritesList favoritesRegions={fetchedUser.favoritesRegions} />

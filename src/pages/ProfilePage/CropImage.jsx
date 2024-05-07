@@ -30,30 +30,13 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
+// FIXME add loader while uploading
 export const CropImage = () => {
   const handleChange = (info) => {
     console.log("running handle change");
     if (info.file.status === "done") {
       // Get this url from response in real world.
       getImage(info.file.originFileObj, async (image) => {
-        const storedToken = localStorage.getItem("authToken");
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-            Authorization: `Bearer ${storedToken}`,
-          },
-        };
-
-        console.log(info.file);
-        console.log(image);
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/profile/image`,
-          {
-            imageUrl: image.path,
-          },
-          config
-        );
-
         // refresh page
         window.location.reload();
       });
@@ -61,7 +44,6 @@ export const CropImage = () => {
   };
 
   async function customRequest(options) {
-    console.log("AFTER CROP");
     const { onSuccess, onError, file } = options;
 
     const fmData = new FormData();
@@ -99,7 +81,6 @@ export const CropImage = () => {
       );
 
       onSuccess();
-      console.log("server res: ", res);
     } catch (err) {
       console.log("Error: ", err);
       onError({ err });
@@ -107,6 +88,9 @@ export const CropImage = () => {
   }
 
   return (
+    <div
+    style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+  >
     <ImgCrop beforeCrop={beforeCrop}>
       <Upload
         rootClassName="upload-style"
@@ -134,7 +118,7 @@ export const CropImage = () => {
           Change Picture
         </a>
       </Upload>
-    </ImgCrop>
+    </ImgCrop></div>
   );
 };
 
