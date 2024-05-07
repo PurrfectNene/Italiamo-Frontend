@@ -15,11 +15,10 @@ import PlaceDetailsPage from "./pages/PlaceDetailsPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
 
 import CulturalPlacesPage from "./pages/CulturalPlacesPage";
-import FoodAndWinePlacesPage from "./pages/FoodAndWinePlacesPage"
-import NaturePlacesPage from "./pages/NaturePlacesPage"
-import VillagesPlacesPage from "./pages/VillagesPlacesPage"
-import RelaxWellnessPlacesPage from "./pages/RelaxWellnessPlacesPage"
-import NewsletterBanner from "./components/NewsletterBanner"
+import FoodAndWinePlacesPage from "./pages/FoodAndWinePlacesPage";
+import NaturePlacesPage from "./pages/NaturePlacesPage";
+import RelaxWellnessPlacesPage from "./pages/RelaxWellnessPlacesPage";
+import VillagesPlacesPage from "./pages/VillagesPlacesPage";
 
 import RegionDetailsPage from "./pages/RegionDetailsPage";
 import RegisterPage from "./pages/RegisterPage";

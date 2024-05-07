@@ -3,9 +3,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LazyReviewList from "../components/LazyReviewList";
+import Loading from "../components/Loading";
 import NewReview from "../components/NewReview";
 import PlaceHoverableCard from "../components/PlaceHoverableCard";
-import Loading from "../components/Loading";
 
 function CityDetailsPage() {
   function calculateReviewsAverage(reviews) {
@@ -98,7 +98,9 @@ function CityDetailsPage() {
             maxWidth: 1200,
             alignItems: "center",
           }}
-        >{city.description}</Row>
+        >
+          {city.description}
+        </Row>
         <Row
           style={{
             width: "100%",
@@ -155,7 +157,7 @@ function CityDetailsPage() {
                 src={places?.[selectedPlace]?.imageUrl}
                 width="100%"
                 height="200px"
-                style={{ borderRadius: "0.5rem" }}
+                style={{ borderRadius: "0.5rem", objectFit: "cover" }}
               />
             )}
             <div style={{ display: "flex", alignItems: "center" }}>

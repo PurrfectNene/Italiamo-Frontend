@@ -1,13 +1,14 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Wrapper } from "@googlemaps/react-wrapper";
-import { Button, Carousel, Col, Rate, Row, Tabs } from "antd";
+import { Button, Carousel, Col, Modal, Rate, Row, Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GoogleMap from "../components/GoogleMap";
-import Loading from "../components/Loading";
-import PlaceCard from "../components/PlaceCard";
+import GoogleMap from "../../components/GoogleMap";
+import Loading from "../../components/Loading";
+import PlaceCard from "../../components/PlaceCard";
+import LazyPlaceInfo from "./LazyPlaceInfo";
 import "./RegionDetailsPage.css";
 
 function RegionDetailsPage() {
@@ -46,6 +47,21 @@ function RegionDetailsPage() {
         console.log(err);
       });
   }, [id]);
+
+  // Places modal
+  const [isModalOpen, setIsModalOpen] = useState(null); // null or {id: place._id, name: place.name}
+
+  const showModal = (state) => {
+    setIsModalOpen(state);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(null);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(null);
+  };
 
   if (!region) {
     return <Loading />;
@@ -247,6 +263,7 @@ function RegionDetailsPage() {
               >
                 <RightOutlined />
               </Button>
+
               <Carousel
                 ref={carouselRef}
                 style={{ height: "400px" }}
@@ -339,6 +356,15 @@ function RegionDetailsPage() {
           justifyContent: "center",
         }}
       >
+        <Modal
+          title={isModalOpen?.name || "Loading..."}
+          open={isModalOpen != null}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          width={900}
+        >
+          <LazyPlaceInfo id={isModalOpen?.id} />
+        </Modal>
         <div
           style={{
             maxWidth: 1200,
@@ -374,6 +400,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -391,6 +420,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -409,6 +441,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -426,6 +461,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -443,6 +481,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>

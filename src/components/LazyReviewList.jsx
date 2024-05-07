@@ -3,7 +3,8 @@ import { Button, Popconfirm, Rate, Spin } from "antd";
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/auth.context";
-export default function LazyReviewList({ load, placeId, state }) {
+
+export default function LazyReviewList({ load, placeId, state, readOnly }) {
   const { user } = useContext(AuthContext);
 
   const [reviews, setReviews] = state;
@@ -84,46 +85,49 @@ export default function LazyReviewList({ load, placeId, state }) {
                     marginLeft: "auto",
                   }}
                 >
-                  <Button
-                    size="small"
-                    onClick={() => {
-                      const editing = editMode === review._id;
-                      if (editing) {
-                        // submit
-                        axios
-                          .put(
-                            `${
-                              import.meta.env.VITE_API_URL
-                            }/api/places/${placeId}/reviews/${review._id}`,
-                            {
-                              rating: newRating,
-                              review: newReview.current.value,
-                            }
-                          )
-                          .then((response) => {
-                            // optimistic update
-                            const updatedReviews = [...reviews];
-                            updatedReviews[index].rating = newRating;
-                            updatedReviews[index].review =
-                              newReview.current.value;
-                            setReviews(updatedReviews);
-                            // reset
-                            setEditMode(null);
-                          })
-                          .catch((error) => {
-                            console.error("Error editing review:", error);
-                          });
+                  {!readOnly && (
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        const editing = editMode === review._id;
+                        if (editing) {
+                          // submit
+                          axios
+                            .put(
+                              `${
+                                import.meta.env.VITE_API_URL
+                              }/api/places/${placeId}/reviews/${review._id}`,
+                              {
+                                rating: newRating,
+                                review: newReview.current.value,
+                              }
+                            )
+                            .then((response) => {
+                              // optimistic update
+                              const updatedReviews = [...reviews];
+                              updatedReviews[index].rating = newRating;
+                              updatedReviews[index].review =
+                                newReview.current.value;
+                              setReviews(updatedReviews);
+                              // reset
+                              setEditMode(null);
+                            })
+                            .catch((error) => {
+                              console.error("Error editing review:", error);
+                            });
 
-                        return;
-                      }
-                      // start editing
-                      setNewRating(review.rating);
-                      setEditMode(review._id);
-                    }}
-                  >
-                    {editMode === review._id ? "Save" : <EditOutlined />}
-                  </Button>
-                  {editMode !== review._id && (
+                          return;
+                        }
+                        // start editing
+                        setNewRating(review.rating);
+                        setEditMode(review._id);
+                      }}
+                    >
+                      {editMode === review._id ? "Save" : <EditOutlined />}
+                    </Button>
+                  )}
+
+                  {!readOnly && editMode !== review._id && (
                     <Popconfirm
                       title="Are you sure to Delete?"
                       onConfirm={() => {
