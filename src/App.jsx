@@ -12,7 +12,6 @@ import DashboardPage from "./pages/Dashboard/DashboardPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
-import ProfileImgPage from "./pages/ProfileImgPage";
 
 import CulturalPlacesPage from "./pages/CulturalPlacesPage";
 import FoodAndWinePlacesPage from "./pages/FoodAndWinePlacesPage";
@@ -20,9 +19,9 @@ import NaturePlacesPage from "./pages/NaturePlacesPage";
 import RelaxWellnessPlacesPage from "./pages/RelaxWellnessPlacesPage";
 import VillagesPlacesPage from "./pages/VillagesPlacesPage";
 
+import ProfilePage from "./pages/ProfilePage";
 import RegionDetailsPage from "./pages/RegionDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
-import UserPage from "./pages/UserPage";
 
 function App() {
   return (
@@ -38,17 +37,44 @@ function App() {
         <Route exact path="/cities" element={<AllCitiesPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
         <Route exact path="/cities/:id" element={<CityDetailsPage />} />
-        <Route exact path="/cities/:cityId/places/:placeId" element={<PlaceDetailsPage />}/>
+        <Route
+          exact
+          path="/cities/:cityId/places/:placeId"
+          element={<PlaceDetailsPage />}
+        />
         <Route exact path="/places/:placeId" element={<PlaceDetailsPage />} />
         <Route exact path="/places/allplaces" element={<AllPlacesPage />} />
         <Route exact path="/places/cultural" element={<CulturalPlacesPage />} />
-        <Route exact path="/places/food&wine" element={<FoodAndWinePlacesPage />} />
+        <Route
+          exact
+          path="/places/food&wine"
+          element={<FoodAndWinePlacesPage />}
+        />
         <Route exact path="/places/nature" element={<NaturePlacesPage />} />
         <Route exact path="/places/villages" element={<VillagesPlacesPage />} />
-        <Route exact path="/places/relax&wellness" element={<RelaxWellnessPlacesPage />} />
-        <Route exact path="/profile" element={<IsPrivate><UserPage /></IsPrivate>}/>
-        <Route exact path="/profile-picture"element={<IsPrivate><ProfileImgPage /></IsPrivate>}/>
-        <Route exact path="/dashboard" element={<DashboardPage />} />
+        <Route
+          exact
+          path="/places/relax&wellness"
+          element={<RelaxWellnessPlacesPage />}
+        />
+        <Route
+          exact
+          path="/profile"
+          element={
+            <IsPrivate>
+              <ProfilePage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          exact
+          path="/dashboard"
+          element={
+            <IsPrivate>
+              <DashboardPage />
+            </IsPrivate>
+          }
+        />
       </Routes>
       <Footer />
     </div>

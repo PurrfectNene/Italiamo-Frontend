@@ -1,5 +1,5 @@
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Button, Card, Flex } from "antd";
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ const { Meta } = Card;
 
 function AllRegionsPage() {
   const { isLoggedIn, user } = useContext(AuthContext);
-  console.log(user)
+  console.log(user);
 
   const [regions, setRegions] = useState([]);
 
@@ -27,22 +27,24 @@ function AllRegionsPage() {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
   };
 
-  
   const addToFavorites = (regionId) => {
-    axios.post(`${import.meta.env.VITE_API_URL}/api/regions/${regionId}/favorites`, {
-      userId: user._id,
-    })
-    .then((response) => {
-      console.log(response)
-      console.log("Region added to favorites successfully!");
-      alert("Region added to favorites successfully!");
-    })
-    .catch((err) => {
-      console.error("Error adding region to favorites:", err);
-      alert("Error adding region to favorites. Please try again later.");
-    });
+    axios
+      .post(
+        `${import.meta.env.VITE_API_URL}/api/regions/${regionId}/favorites`,
+        {
+          userId: user._id,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log("Region added to favorites successfully!");
+        alert("Region added to favorites successfully!");
+      })
+      .catch((err) => {
+        console.error("Error adding region to favorites:", err);
+        alert("Error adding region to favorites. Please try again later.");
+      });
   };
-  
 
   const isFavorite = (regionId) => {
     if (user && user.favoritesRegions) {
@@ -50,7 +52,6 @@ function AllRegionsPage() {
     }
     return false;
   };
-
 
   return (
     <div>
@@ -111,7 +112,13 @@ function AllRegionsPage() {
             <Card
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={<img alt={region.name} src={region.imageUrl} style={{ width: "100%", height: "200px", objectFit: "cover" }}/>}
+              cover={
+                <img
+                  alt={region.name}
+                  src={region.imageUrl}
+                  style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                />
+              }
             >
               <Meta
                 title={region.name}
@@ -119,12 +126,26 @@ function AllRegionsPage() {
               />
               <br></br>
               <Flex gap="small" wrap="wrap">
-              {isLoggedIn && (
-                    <button onClick={() => addToFavorites(region._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
-                      {isFavorite(region._id) ? <HeartFilled style={{ color: '#5F4E44' }} /> : <HeartOutlined />}
-                    </button>
-                  )}
-                  <Button type="link" style={{ color: "#5F4E44" }}>Read more</Button>
+                {isLoggedIn && (
+                  <button
+                    onClick={() => addToFavorites(region._id)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      outline: "none",
+                    }}
+                  >
+                    {isFavorite(region._id) ? (
+                      <HeartFilled style={{ color: "#5F4E44" }} />
+                    ) : (
+                      <HeartOutlined />
+                    )}
+                  </button>
+                )}
+                <Button type="link" style={{ color: "#5F4E44" }}>
+                  Read more
+                </Button>
               </Flex>
             </Card>
           </Link>
