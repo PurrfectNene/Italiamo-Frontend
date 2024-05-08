@@ -1,7 +1,7 @@
 import { Col, Rate, Row, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import LazyReviewList from "../../components/LazyReviewList";
+import LazyReviewList from "./LazyReviewList";
 
 export default function LazyPlaceInfo({ id }) {
   const [placeData, setPlaceData] = useState(null);

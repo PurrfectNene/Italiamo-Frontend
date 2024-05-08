@@ -31,7 +31,7 @@ function beforeUpload(file) {
 }
 
 // FIXME add loader while uploading
-export const CropImage = () => {
+export const CropImage = ({ children }) => {
   const handleChange = (info) => {
     console.log("running handle change");
     if (info.file.status === "done") {
@@ -89,20 +89,21 @@ export const CropImage = () => {
 
   return (
     <div
-    style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-  >
-    <ImgCrop beforeCrop={beforeCrop}>
-      <Upload
-        rootClassName="upload-style"
-        name="avatar"
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        onChange={handleChange}
-        customRequest={customRequest}
-        beforeUpload={beforeUpload}
-      >
-        <a
+      style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    >
+      <ImgCrop beforeCrop={beforeCrop}>
+        <Upload
+          rootClassName="upload-style"
+          name="avatar"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          onChange={handleChange}
+          customRequest={customRequest}
+          beforeUpload={beforeUpload}
+        >
+          {children}
+          {/* <a
           style={{
             display: "flex",
             color: "white",
@@ -116,9 +117,10 @@ export const CropImage = () => {
         >
           <UploadOutlined />
           Change Picture
-        </a>
-      </Upload>
-    </ImgCrop></div>
+        </a> */}
+        </Upload>
+      </ImgCrop>
+    </div>
   );
 };
 

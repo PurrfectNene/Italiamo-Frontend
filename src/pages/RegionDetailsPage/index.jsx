@@ -1,6 +1,6 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Wrapper } from "@googlemaps/react-wrapper";
-import { Button, Carousel, Col, Modal, Rate, Row, Tabs } from "antd";
+import { Button, Carousel, Col, Rate, Row, Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import GoogleMap from "../../components/GoogleMap";
 import Loading from "../../components/Loading";
 import PlaceCard from "../../components/PlaceCard";
-import LazyPlaceInfo from "./LazyPlaceInfo";
+import usePlaceModal from "../../hooks/usePlaceModal";
 import "./RegionDetailsPage.css";
 
 function RegionDetailsPage() {
@@ -48,20 +48,8 @@ function RegionDetailsPage() {
       });
   }, [id]);
 
-  // Places modal
-  const [isModalOpen, setIsModalOpen] = useState(null); // null or {id: place._id, name: place.name}
-
-  const showModal = (state) => {
-    setIsModalOpen(state);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(null);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(null);
-  };
+  // Place modal
+  const { showModal, Modal } = usePlaceModal();
 
   if (!region) {
     return <Loading />;
@@ -303,15 +291,7 @@ function RegionDetailsPage() {
           justifyContent: "center",
         }}
       >
-        <Modal
-          title={isModalOpen?.name || "Loading..."}
-          open={isModalOpen != null}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          width={900}
-        >
-          <LazyPlaceInfo id={isModalOpen?.id} />
-        </Modal>
+        <Modal />
         <div
           style={{
             maxWidth: 1200,
