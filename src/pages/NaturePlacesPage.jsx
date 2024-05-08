@@ -8,14 +8,15 @@ import { AuthContext } from "../context/auth.context";
 const { Meta } = Card;
 
 function NaturePlacesPage() {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, user } = useContext(AuthContext);
     const [places, setPlaces] = useState([]);
     const [sortBy, setSortBy] = useState(null);
     const [searchText, setSearchText] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [placesPerPage] = useState(6);
+    const [placesPerPage] = useState(14);
     const [filteredPlaces, setFilteredPlaces] = useState([]);
     const [searchInput, setSearchInput] = useState(""); 
+    const [placesMaster, setPlacesMaster] = useState([]);
 
     useEffect(() => {
         axios
@@ -23,6 +24,7 @@ function NaturePlacesPage() {
             .then((response) => {
                 setPlaces(response.data);
                 setFilteredPlaces(response.data);
+                setPlacesMaster(response.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -55,15 +57,37 @@ function NaturePlacesPage() {
 
     const handleSearch = (e) => {
         const searchText = e.target.value.toLowerCase();
-        setSearchInput(e.target.value); // Try track search input separately
+        setSearchInput(e.target.value); // Track search input separately
         if (searchText === "") {
-            setFilteredPlaces(places); // And here reset filter
+            setFilteredPlaces(placesMaster); // Reset filter
         } else {
-            const filteredPlaces = places.filter(place =>
+            const filteredPlaces = placesMaster.filter(place =>
                 place.city.name.toLowerCase().startsWith(searchText)
             );
             setFilteredPlaces(filteredPlaces);
         }
+    };
+
+    const addToFavorites = (placeId) => {
+        axios.post(`${import.meta.env.VITE_API_URL}/api/places/${placeId}/favorites`, {
+            userId: user._id,
+        })
+        .then((response) => {
+            console.log(response)
+            console.log("Place added to favorites successfully!");
+            alert("Place added to favorites successfully!");
+        })
+        .catch((err) => {
+            console.error("Error adding place to favorites:", err);
+            alert("Error adding place to favorites. Please try again later.");
+        });
+    };
+    
+    const isFavorite = (placeId) => {
+        if (user && user.favoritesPlaces) {
+            return user.favoritesPlaces.includes(placeId);
+        }
+        return false;
     };
 
     return (
@@ -101,7 +125,7 @@ function NaturePlacesPage() {
                     Explore Natural Wonders
                 </h2>
                 <p style={{ fontSize: "20px" }}>
-                Explore locations brimming with natural wonders and breathtaking beauty just waiting to be discovered.
+                    Explore locations brimming with natural wonders and breathtaking beauty just waiting to be discovered.
                 </p>
             </div>
             <div style={{ marginBottom: '20px', textAlign: 'center' }}>
@@ -139,6 +163,11 @@ function NaturePlacesPage() {
                             wrap="wrap"
                             style={{ justifyContent: "flex-end" }}
                         >
+                            {isLoggedIn && (
+                                <button onClick={() => addToFavorites(place._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
+                                    {isFavorite(place._id) ? <HeartFilled style={{ color: '#5F4E44' }} /> : <HeartOutlined />}
+                                </button>
+                            )}
                             <Link
                                 to={`/cities/${place.city}`}
                                 style={{ textDecoration: "none", color: "#5F4E44" }}
@@ -147,11 +176,6 @@ function NaturePlacesPage() {
                                     {place.city.name}
                                 </p>
                             </Link>
-                            {isLoggedIn && (
-                                <button onClick={() => addToFavorites(region._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
-                                    {isFavorite(region._id) ? <HeartFilled style={{ color: '#5F4E44' }} /> : <HeartOutlined />}
-                                </button>
-                            )}
                         </Flex>
                     </Card>
                 ))}
@@ -169,3 +193,5 @@ function NaturePlacesPage() {
 }
 
 export default NaturePlacesPage;
+
+

@@ -14,7 +14,6 @@ import LoginPage from "./pages/LoginPage";
 import PlaceDetailsPage from "./pages/PlaceDetailsPage";
 import ProfileImgPage from "./pages/ProfileImgPage";
 
-import DashboardPage from "./pages/Dashboard/DashboardPage";
 import CulturalPlacesPage from "./pages/CulturalPlacesPage";
 import FoodAndWinePlacesPage from "./pages/FoodAndWinePlacesPage"
 import NaturePlacesPage from "./pages/NaturePlacesPage"
