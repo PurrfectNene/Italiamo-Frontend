@@ -58,7 +58,12 @@ function ProfilePage() {
           <CropImage />
 
           <div>
-            <FavouritesList favoritesRegions={fetchedUser.favoritesRegions} />
+            <FavouritesList
+              favoritesRegions={fetchedUser.favoritesRegions}
+              favoritesCities={fetchedUser.favoritesCities}
+              favoritesPlaces={fetchedUser.favoritesPlaces}
+              fetchedUser={fetchedUser}
+            />
           </div>
         </div>
       )}

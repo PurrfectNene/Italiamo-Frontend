@@ -5,8 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { isLoggedIn, logOutUser } = useContext(AuthContext);
-
+  const { isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
 
   const { pathname } = useLocation();
 
@@ -40,12 +39,16 @@ export default function Navbar() {
         }}
         size={"large"}
       >
-        <Link className="menu-link" to="/regions">
-          Regions
-        </Link>
-        <Link className="menu-link" to="/cities">
-          Cities
-        </Link>
+        {!isLoading && (
+          <>
+            <Link className="menu-link" to="/regions">
+              Regions
+            </Link>
+            <Link className="menu-link" to="/cities">
+              Cities
+            </Link>
+          </>
+        )}
       </Space>
       <Link
         to="/"
@@ -70,30 +73,31 @@ export default function Navbar() {
         }}
         size={"large"}
       >
-        {isLoggedIn ? (
-          <>
-            <Link className="menu-link" to="/profile">
-              Profile
-            </Link>
-            <Link
-              className="menu-link"
-              onClick={() => {
-                logOutUser();
-              }}
-            >
-              Logout
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link className="menu-link" to="/login">
-              Login
-            </Link>
-            <Link className="menu-link" to="/register">
-              Register
-            </Link>
-          </>
-        )}
+        {!isLoading &&
+          (isLoggedIn ? (
+            <>
+              <Link className="menu-link" to="/profile">
+                Profile
+              </Link>
+              <Link
+                className="menu-link"
+                onClick={() => {
+                  logOutUser();
+                }}
+              >
+                Logout
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link className="menu-link" to="/login">
+                Login
+              </Link>
+              <Link className="menu-link" to="/register">
+                Register
+              </Link>
+            </>
+          ))}
       </Space>
       {/* {isLoggedIn ? (
         <></>

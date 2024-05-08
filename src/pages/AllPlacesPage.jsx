@@ -1,29 +1,111 @@
 import { Button, Card, Flex } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom"; 
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 const { Meta } = Card;
+import { AuthContext } from "../context/auth.context";
+
 
 function AllPlacesPage() {
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [places, setPlaces] = useState([]);
+  const [favoritesPlaces,setFavoritesPlaces] = useState([])
+
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/places`) 
+      .get(`${import.meta.env.VITE_API_URL}/api/places`)
       .then((response) => {
         setPlaces(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+
+      if (isLoggedIn && user) {
+        axios
+            .get(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/favoritesPlaces`)
+            .then((response) => {
+                console.log("fetched")
+               setFavoritesPlaces(response.data)
+                console.log(response.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+}, [isLoggedIn, user]);
 
 
   const truncateDescription = (description) => {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
   };
 
+  const shuffleArray = (array) => {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
+  const toggleFavorite = (placeId) => {
+    if (favoritesPlaces.includes(placeId)) {
+        removeFavorite(placeId);
+    } else {
+        addFavorite(placeId);
+    }
+};
+
+const addFavorite = (placeId) => {
+  axios.post(`${import.meta.env.VITE_API_URL}/api/places/${placeId}/favorites`, {
+      userId: user._id,
+  })
+  .then((response) => {
+      console.log(response);
+      console.log("Place added to favorites successfully!");
+      alert("Place added to favorites successfully!");
+  })
+  .catch((err) => {
+      console.error("Error adding place to favorites:", err);
+      alert("Error adding place to favorites. Please try again later.");
+  });
+};
+
+const removeFavorite = (placeId) => {
+  axios.delete(`${import.meta.env.VITE_API_URL}/api/regions/${placeId}/favorites/${user._id}`)
+  .then((response) => {
+      console.log(response);
+      console.log("Place removed from favorites successfully!");
+      alert("Place removed from favorites successfully!");
+  })
+  .catch((err) => {
+      console.error("Error removing place from favorites:", err);
+      alert("Error removing place from favorites. Please try again later.");
+  });
+};
+  const isFavorite = (placeId) => {
+    if (user && user.favoritesPlaces) {
+      return user.favoritesRegions.includes(placeId);
+  }
+    return false; 
+  };
+
   const renderPlacesByType = (type) => {
     const filteredPlaces = places.filter((place) => place.type === type);
+    const shuffledPlaces = shuffleArray(filteredPlaces).slice(0, 8); 
+
     return (
       <div key={type}>
         <h1>{type}</h1>
@@ -34,7 +116,7 @@ function AllPlacesPage() {
             justifyContent: "space-around",
           }}
         >
-          {filteredPlaces.map((place) => (
+          {shuffledPlaces.map((place) => (
             <Card
               key={place._id}
               hoverable
@@ -45,8 +127,13 @@ function AllPlacesPage() {
                 title={place.name}
                 description={truncateDescription(place.description)}
               />
-              <br></br>
+              <br />
               <Flex gap="small" wrap="wrap">
+              {isLoggedIn && (
+              <button onClick={() => toggleFavorite(place._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
+    {favoritesPlaces.includes(place._id) ? <HeartFilled style={{ color: '#5F4E44' }} /> : <HeartOutlined />}
+</button>
+              )}
                 <Button type="link">Details</Button>
               </Flex>
             </Card>
@@ -94,21 +181,37 @@ function AllPlacesPage() {
       </div>
       <div id="cultural">
         {renderPlacesByType("Cultural")}
+        <Link to="/places/cultural">
+          <Button type="primary" style={{ background: "#927766", marginTop: '20px', marginBottom: "50px" }}>Discover all cultural places</Button>
+        </Link>
       </div>
       <div id="food&wine">
         {renderPlacesByType("Food&Wine")}
+        <Link to="/places/food&wine">
+          <Button type="primary" style={{ background: "#927766", marginTop: '20px', marginBottom: "50px" }}>Discover all food places</Button>
+        </Link>
       </div>
       <div id="relax&wellness">
-      {renderPlacesByType("Relax&Wellness")}
+        {renderPlacesByType("Relax&Wellness")}
+        <Link to="//places/relax&wellness">
+          <Button type="primary" style={{ background: "#927766", marginTop: '20px', marginBottom: "50px" }}>Discover all relax & wellness places</Button>
+        </Link>
       </div>
       <div id="villages">
-      {renderPlacesByType("Villages")}
+        {renderPlacesByType("Villages")}
+        <Link to="//places/villages">
+          <Button type="primary" style={{ background: "#927766", marginTop: '20px', marginBottom: "50px" }}>Discover all villages</Button>
+        </Link>
       </div>
       <div id="nature">
-      {renderPlacesByType("Nature")}
+        {renderPlacesByType("Nature")}
+        <Link to="/places/nature">
+          <Button type="primary" style={{ background: "#927766", marginTop: '20px',  marginBottom: "50px"}}>Discover all nature places</Button>
+        </Link>
       </div>
     </div>
   );
 }
 
 export default AllPlacesPage;
+

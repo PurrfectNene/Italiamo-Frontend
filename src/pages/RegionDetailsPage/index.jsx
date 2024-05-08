@@ -147,38 +147,6 @@ function RegionDetailsPage() {
           <Col style={{ flex: 1, fontSize: "1rem" }}>
             <p>{region.description}</p>
           </Col>
-          {/* <Col
-            style={{
-              backgroundColor: "white",
-              padding: "1rem",
-              borderRadius: "0.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              minWidth: 400,
-              height: "fit-content",
-              boxShadow:
-                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-            }}
-          >
-            <h1 style={{ margin: 0, fontSize: "1.25rem" }}>Explore the area</h1>
-            <Wrapper
-              apiKey={import.meta.env.VITE_GOOGLEAPIKEY}
-              render={() => {
-                return <p>Loading...</p>;
-              }}
-            >
-              <GoogleMap />
-            </Wrapper>
-            <Row style={{ gap: "0.75em" }}>
-              <Rate
-                disabled
-                value={4}
-                style={{ marginBottom: "0.5rem", fontSize: "1rem" }}
-              />{" "}
-              4.5 (1249 reviews)
-            </Row>
-          </Col> */}
         </Row>
       </section>
       <section
@@ -326,28 +294,7 @@ function RegionDetailsPage() {
           flexDirection: "column",
           alignItems: "center",
         }}
-      >
-        {/* <Row style={{ maxWidth: 1200, padding: "2rem" }}>
-          <h1 style={{ margin: 0 }}>{region.name}</h1>
-          <p>{region.description}</p>
-          <h2>Cities in {region.name}</h2>
-          <ul>
-            {cities.map((city) => (
-              <li key={city._id}>
-                <Link to={`/cities/${city._id}`}>{city.name}</Link>
-              </li>
-            ))}
-          </ul>
-          <h2>Places in {region.name}</h2>
-          <ul>
-            {places.map((place) => (
-              <li key={place._id}>
-                <Link to={`/places/${place.city._id}`}>{place.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </Row> */}
-      </section>
+      ></section>
       <section
         id="cities"
         style={{
