@@ -118,7 +118,7 @@ export default function LazyPlaceInfo({ id }) {
             position: "relative",
           }}
         >
-          <div style={{ position: "absolute", width: "100%" }}>
+          <div style={{ position: "absolute", width: "100%", height: "100%" }}>
             <LazyReviewList
               placeId={placeData?._id}
               load={open}

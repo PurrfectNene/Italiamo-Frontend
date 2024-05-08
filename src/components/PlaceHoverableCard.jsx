@@ -25,6 +25,7 @@ export default function PlaceHoverableCard({ link, data, onClick }) {
           width: 160,
           height: 120,
           borderRadius: "1rem",
+          objectFit: "cover",
         }}
       />
     </Wrapper>

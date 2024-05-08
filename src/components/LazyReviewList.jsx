@@ -60,8 +60,22 @@ export default function LazyReviewList({ load, placeId, state, readOnly }) {
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
+        height: "100%",
       }}
     >
+      {reviews.length === 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+            height: "100%",
+          }}
+        >
+          <span>No reviews yet</span>
+        </div>
+      )}
       {reviews.map((review, index) => {
         return (
           <div
