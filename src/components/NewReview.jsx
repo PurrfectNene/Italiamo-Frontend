@@ -27,7 +27,7 @@ export default function NewReview({ placeId, state }) {
         //   setShowAddReviewModal(false);
         setReviews([response.data, ...reviews]);
         comment.current.value = "";
-        setRating(0);
+        setRating(1);
       })
       .catch((error) => {
         console.error("Error adding review:", error);

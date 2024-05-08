@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function PlaceCard({ name, imageSrc }) {
+export default function PlaceCard({ name, imageSrc, onClick }) {
   return (
     <Link
       //   to={"/places/:id"}
@@ -10,6 +10,7 @@ export default function PlaceCard({ name, imageSrc }) {
         flexDirection: "column",
         textDecorationColor: "black",
       }}
+      onClick={onClick}
     >
       <img
         width={"100%"}

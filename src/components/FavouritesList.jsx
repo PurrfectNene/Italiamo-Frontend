@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
 
 function FavouritesList(props) {
   console.log("props", props);
-  console.log(props.favoritesCities)
-  console.log(props.favoritePlace)
+  console.log(props.favoritesCities);
+  console.log(props.favoritePlace);
+  console.log(props.favoritesRegions);
+
+  if (!props.favoriteRegions || props.favoriteRegion.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       <div>
@@ -18,7 +24,7 @@ function FavouritesList(props) {
         <h2>Your Favourite Cities:</h2>
         <ul>
           {props.favoritesCities.map((favoriteCity, index) => {
-            console.log("Favorite City:", favoriteCity.name); 
+            console.log("Favorite City:", favoriteCity.name);
             return <li key={index}>{favoriteCity.name}</li>;
           })}
         </ul>
@@ -27,7 +33,7 @@ function FavouritesList(props) {
         <h2>Your Favourite Places:</h2>
         <ul>
           {props.favoritesPlaces.map((favoritePlace, index) => {
-            console.log("Favorite Place:", favoritePlace.name); 
+            console.log("Favorite Place:", favoritePlace.name);
             return <li key={index}>{favoritePlace.name}</li>;
           })}
         </ul>
@@ -37,4 +43,3 @@ function FavouritesList(props) {
 }
 
 export default FavouritesList;
-
