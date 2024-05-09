@@ -91,7 +91,7 @@ export default function LazyReviewList({ load, placeId, state, readOnly }) {
               <h1 style={{ margin: 0, fontSize: "1.25rem" }}>
                 {review.user.email}
               </h1>
-              {review.user._id === user._id && (
+              {review.user._id === user?._id && (
                 <div
                   style={{
                     display: "flex",
