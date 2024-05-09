@@ -166,7 +166,10 @@ function FoodAndWinePlacesPage() {
                 {" "}
                 <img
                   alt={place.name}
-                  src={place.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
+                  src={place.imageUrl.replace(
+                    "upload/",
+                    "upload/c_scale,w_500/"
+                  )}
                   style={{ width: "100%", height: "200px", objectFit: "cover" }}
                 />
               </Link>
@@ -219,8 +222,8 @@ function FoodAndWinePlacesPage() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "30px",
-          marginTop: "50px",
+          marginTop: 80,
+          paddingBottom: 20,
         }}
       >
         <Pagination

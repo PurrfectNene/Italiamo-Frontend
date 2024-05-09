@@ -5,6 +5,9 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { motion } from "framer-motion";
+
+const MotionCard = motion(Card);
 
 const { Meta } = Card;
 const { Option } = Select;
@@ -206,13 +209,20 @@ function AllRegionsPage() {
             key={region._id}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <Card
+            <MotionCard
+              initial={{  opacity: currentPage !== 1 ? 1 : 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               hoverable
               style={{ width: 300, margin: 20 }}
               cover={
                 <img
                   alt={region.name}
-                  src={region.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
+                  src={region.imageUrl.replace(
+                    "upload/",
+                    "upload/c_scale,w_500/"
+                  )}
                   style={{ width: "100%", height: "200px", objectFit: "cover" }}
                 />
               }
@@ -247,12 +257,12 @@ function AllRegionsPage() {
                   Read more
                 </Button>
               </Flex>
-            </Card>
+            </MotionCard>
           </Link>
         ))}
       </div>
       <Pagination
-        style={{ textAlign: "center", marginTop: "80px" }}
+        style={{ textAlign: "center", marginTop: 80, paddingBottom: 20 }}
         current={currentPage}
         onChange={paginate}
         pageSize={regionsPerPage}

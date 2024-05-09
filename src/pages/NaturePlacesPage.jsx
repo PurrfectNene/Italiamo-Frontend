@@ -221,8 +221,8 @@ function NaturePlacesPage() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "30px",
-          marginTop: "50px",
+          marginTop: 80,
+          paddingBottom: 20,
         }}
       >
         <Pagination

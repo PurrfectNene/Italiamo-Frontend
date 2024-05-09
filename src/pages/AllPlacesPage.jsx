@@ -1,11 +1,14 @@
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Button, Card, Flex } from "antd";
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import usePlaceModal from "../hooks/usePlaceModal";
 const { Meta } = Card;
+
+const MotionCard = motion(Card);
 
 function AllPlacesPage() {
   const placesShuffleCache = useRef({});
@@ -137,11 +140,24 @@ function AllPlacesPage() {
           }}
         >
           {shuffledPlaces.map((place) => (
-            <Card
+            <MotionCard
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={place._id}
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={<img alt={place.name} src={place.imageUrl.replace("upload/", "upload/c_scale,w_500/")} />}
+              cover={
+                <img
+                  style={{ height: 200 }}
+                  alt={place.name}
+                  src={place.imageUrl.replace(
+                    "upload/",
+                    "upload/c_scale,w_500/"
+                  )}
+                />
+              }
               onClick={() => showModal({ id: place._id, name: place.name })}
             >
               <Meta
@@ -169,7 +185,7 @@ function AllPlacesPage() {
                 )}
                 <Button type="link">Details</Button>
               </Flex>
-            </Card>
+            </MotionCard>
           ))}
         </div>
       </div>

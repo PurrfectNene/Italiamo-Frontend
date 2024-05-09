@@ -4,6 +4,9 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { motion } from "framer-motion";
+
+const MotionCard = motion(Card);
 
 const { Meta } = Card;
 const { Option } = Select;
@@ -203,7 +206,11 @@ function AllCitiesPage() {
       >
         {filteredCities.map((city) => {
           return (
-            <Card
+            <MotionCard
+              initial={{ opacity: currentPage !== 1 ? 1 : 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={city._id}
               hoverable
               style={{ width: 300, margin: 20 }}
@@ -214,7 +221,10 @@ function AllCitiesPage() {
                 >
                   <img
                     alt={city.name}
-                    src={city.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
+                    src={city.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_500/"
+                    )}
                     style={{
                       width: "100%",
                       height: "200px",
@@ -267,11 +277,11 @@ function AllCitiesPage() {
                   </Button>
                 </Link>
               </Flex>
-            </Card>
+            </MotionCard>
           );
         })}
       </div>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <div style={{ textAlign: "center", paddingBottom: 20, marginTop: 80 }}>
         <Pagination
           current={currentPage}
           onChange={paginate}

@@ -1,9 +1,13 @@
 import { Button, Card, Flex, Input, List, Select } from "antd";
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
 const { Option } = Select;
+
+const MotionCard = motion(Card);
+const MotionButton = motion(Button);
 
 function HomePage() {
   const [regions, setRegions] = useState([]);
@@ -33,7 +37,6 @@ function HomePage() {
         console.log(err);
       });
   }, []);
-
 
   const truncateDescription = (description) => {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
@@ -74,7 +77,11 @@ function HomePage() {
   const renderPlaceCards = () => {
     return (
       <React.Fragment>
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
           style={{ width: 200, margin: 20 }}
           cover={
@@ -99,9 +106,13 @@ function HomePage() {
               description="Explore Italy's Cultural Wonders: Where Every Place Tells a Story of Beauty and History."
             />
           </Link>
-        </Card>
+        </MotionCard>
 
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
           style={{ width: 200, margin: 20 }}
           cover={
@@ -121,15 +132,18 @@ function HomePage() {
             to={{ pathname: "/places/food&wine" }}
             style={{ textDecoration: "none", width: "100%" }}
           >
-            {" "}
             <Meta
               title="Food&Wine"
               description="Indulge in Italy's flavorful symphony: Taste the Passion, Savor the Tradition"
             />
           </Link>
-        </Card>
+        </MotionCard>
 
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
           style={{ width: 200, margin: 20 }}
           cover={
@@ -154,9 +168,13 @@ function HomePage() {
               description="Step into Italy's Timeless Charm: Where Every Village Tells a Story of Tradition and Warmth."
             />
           </Link>
-        </Card>
+        </MotionCard>
 
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
           style={{ width: 200, margin: 20 }}
           cover={
@@ -181,9 +199,13 @@ function HomePage() {
               description="Embrace Italy's Natural Splendor: Where beauty blooms and serenity flourishes."
             />
           </Link>
-        </Card>
+        </MotionCard>
 
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
           style={{ width: 200, margin: 20 }}
           cover={
@@ -208,7 +230,7 @@ function HomePage() {
               description="Revel in Italy's Tranquil Retreats: Renew Your Soul in the Heart of Relaxation."
             />
           </Link>
-        </Card>
+        </MotionCard>
       </React.Fragment>
     );
   };
@@ -295,7 +317,14 @@ function HomePage() {
       </div>
 
       <div style={{ marginTop: "100px" }}>
-        <h2>Regions</h2>
+        <motion.h2
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Regions
+        </motion.h2>
         <div
           style={{
             display: "flex",
@@ -304,7 +333,11 @@ function HomePage() {
           }}
         >
           {regions.map((region) => (
-            <Card
+            <MotionCard
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={region._id}
               hoverable
               style={{ width: 300, margin: 20 }}
@@ -319,7 +352,10 @@ function HomePage() {
                 >
                   <img
                     alt={region.name}
-                    src={region.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
+                    src={region.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_500/"
+                    )}
                     style={{
                       width: "100%",
                       height: "200px",
@@ -348,11 +384,18 @@ function HomePage() {
                   </Button>
                 </Flex>
               </Link>
-            </Card>
+            </MotionCard>
           ))}
         </div>
         <Link to="/regions" style={{ textDecoration: "none" }}>
-          <Button type="primary" style={{ background: "#927766" }}>
+          <Button
+            initial={{ opacity: 0, bottom: -50 }}
+            viewport={{ amount: 0.3, once: true }}
+            whileInView={{ opacity: 1, bottom: 0 }}
+            transition={{ duration: 0.7 }}
+            type="primary"
+            style={{ background: "#927766" }}
+          >
             Discover all regions
           </Button>
         </Link>
@@ -360,7 +403,14 @@ function HomePage() {
       <br />
 
       <div>
-        <h2>Cities</h2>
+        <motion.h2
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Cities
+        </motion.h2>
         <div
           style={{
             display: "flex",
@@ -369,7 +419,11 @@ function HomePage() {
           }}
         >
           {cities.map((city) => (
-            <Card
+            <MotionCard
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={city._id}
               hoverable
               style={{ width: 300, margin: 20 }}
@@ -380,7 +434,10 @@ function HomePage() {
                 >
                   <img
                     alt={city.name}
-                    src={city.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
+                    src={city.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_500/"
+                    )}
                     style={{
                       width: "100%",
                       height: "200px",
@@ -407,11 +464,18 @@ function HomePage() {
                   style={{ justifyContent: "flex-end" }}
                 ></Flex>
               </Link>
-            </Card>
+            </MotionCard>
           ))}
         </div>
         <Link to="/cities" style={{ textDecoration: "none" }}>
-          <Button type="primary" style={{ background: "#927766" }}>
+          <Button
+            initial={{ opacity: 0, bottom: -50 }}
+            viewport={{ amount: 0.3, once: true }}
+            whileInView={{ opacity: 1, bottom: 0 }}
+            transition={{ duration: 0.7 }}
+            type="primary"
+            style={{ background: "#927766" }}
+          >
             Discover all cities
           </Button>
         </Link>
@@ -433,7 +497,14 @@ function HomePage() {
 
         <div style={{ marginBottom: "50px" }}>
           <Link to="/places/allplaces" style={{ textDecoration: "none" }}>
-            <Button type="primary" style={{ background: "#927766" }}>
+            <Button
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
+              type="primary"
+              style={{ background: "#927766" }}
+            >
               Discover all places
             </Button>
           </Link>

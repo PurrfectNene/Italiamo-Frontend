@@ -61,6 +61,8 @@ function CityDetailsPage() {
   if (!city) {
     return <Loading />;
   }
+
+  
   return (
     <div
       style={{
@@ -123,7 +125,7 @@ function CityDetailsPage() {
               height="100%"
             />
           </Col>
-          {places.length >= 0 && (
+          {places.length > 0 && (
             <>
               <Col
                 className="hide-scroll"
