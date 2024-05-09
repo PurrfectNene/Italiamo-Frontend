@@ -40,9 +40,9 @@ function AllRegionsPage() {
           }/favoritesRegions`
         )
         .then((response) => {
-          console.log("fetched");
+          // console.log("fetched");
           setFavoritesRegions(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((err) => {
           console.log(err);
@@ -107,8 +107,8 @@ function AllRegionsPage() {
         }
       )
       .then((response) => {
-        console.log(response);
-        console.log("Region added to favorites successfully!");
+        // console.log(response);
+        // console.log("Region added to favorites successfully!");
         alert("Region added to favorites successfully!");
       })
       .catch((err) => {
@@ -125,8 +125,8 @@ function AllRegionsPage() {
         }`
       )
       .then((response) => {
-        console.log(response);
-        console.log("Region removed from favorites successfully!");
+        // console.log(response);
+        // console.log("Region removed from favorites successfully!");
         alert("Region removed from favorites successfully!");
       })
       .catch((err) => {
@@ -212,7 +212,7 @@ function AllRegionsPage() {
               cover={
                 <img
                   alt={region.name}
-                  src={region.imageUrl}
+                  src={region.imageUrl.replace("upload/", "upload/c_scale,w_500/")}
                   style={{ width: "100%", height: "200px", objectFit: "cover" }}
                 />
               }
@@ -225,7 +225,10 @@ function AllRegionsPage() {
               <Flex gap="small" wrap="wrap">
                 {isLoggedIn && (
                   <button
-                    onClick={() => toggleFavorite(region._id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleFavorite(region._id);
+                    }}
                     style={{
                       background: "none",
                       border: "none",

@@ -232,7 +232,10 @@ function RegionDetailsPage() {
                   <div key={city._id}>
                     <Link to={`/cities/${city._id}`}>
                       <img
-                        src={city.imageUrl}
+                        src={city.imageUrl.replace(
+                          "upload/",
+                          "upload/c_scale,w_1000/"
+                        )}
                         style={{
                           height: "280px",
                           width: "100%",

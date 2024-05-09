@@ -1,58 +1,59 @@
-import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
-
+import React, { createContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
+function AuthProviderWrapper(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
-function AuthProviderWrapper(props){
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState(null);
+  const authenticateUser = () => {
+    const storedToken = localStorage.getItem("authToken");
 
-    const authenticateUser = () => { 
-        const storedToken = localStorage.getItem('authToken');
-        
-        if (storedToken) {
-          axios.get(`${import.meta.env.VITE_API_URL}/auth/verify`,{headers:{Authorization:`Bearer ${storedToken}`}})
-          .then((response) => {
-            const user = response.data;
-            console.log(response.data)
+    if (storedToken) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/auth/verify`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          const user = response.data;
+          // console.log(response.data)
 
-            setIsLoggedIn(true);
-            setIsLoading(false);
-            setUser(user);        
-          })
-          .catch((error) => {   
-            setIsLoggedIn(false);
-            setIsLoading(false);
-            setUser(null);    
-            console.error('Error fetching user data:', error);
-            localStorage.removeItem("authToken")
-          });
-        } else {
-            setIsLoggedIn(false);
-            setIsLoading(false);
-            setUser(null);
-        }   
-      }
+          setIsLoggedIn(true);
+          setIsLoading(false);
+          setUser(user);
+        })
+        .catch((error) => {
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          setUser(null);
+          console.error("Error fetching user data:", error);
+          localStorage.removeItem("authToken");
+        });
+    } else {
+      setIsLoggedIn(false);
+      setIsLoading(false);
+      setUser(null);
+    }
+  };
 
-      function logOutUser(){
+  function logOutUser() {
+    localStorage.removeItem("authToken");
+    authenticateUser();
+  }
 
-        localStorage.removeItem('authToken')
-        authenticateUser()
-    
-      }
-
-      useEffect(()=>{
-        console.log("Verifies the token initially")
-        authenticateUser()
-      },[])
-      return (
-        <AuthContext.Provider value={{ isLoggedIn, isLoading, user, authenticateUser, logOutUser }}>
-          {props.children}
-        </AuthContext.Provider>
-      )
+  useEffect(() => {
+    // console.log("Verifies the token initially");
+    authenticateUser();
+  }, []);
+  return (
+    <AuthContext.Provider
+      value={{ isLoggedIn, isLoading, user, authenticateUser, logOutUser }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
 
-export { AuthProviderWrapper, AuthContext };
+export { AuthContext, AuthProviderWrapper };

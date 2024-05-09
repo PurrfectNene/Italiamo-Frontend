@@ -19,7 +19,7 @@ export default function PlaceHoverableCard({ link, data, onClick }) {
   return (
     <Wrapper>
       <img
-        src={data.imageUrl}
+        src={data.imageUrl.replace("upload/", "upload/c_scale,w_350/")}
         style={{
           background: "grey",
           width: 160,

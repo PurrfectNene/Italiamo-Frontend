@@ -158,7 +158,10 @@ function CityDetailsPage() {
               >
                 {places?.[selectedPlace]?._id && (
                   <img
-                    src={places?.[selectedPlace]?.imageUrl}
+                    src={places?.[selectedPlace]?.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_900/"
+                    )}
                     width="100%"
                     height="200px"
                     style={{ borderRadius: "0.5rem", objectFit: "cover" }}

@@ -16,7 +16,7 @@ export default function PlaceCard({ name, imageSrc, onClick }) {
         width={"100%"}
         height={200}
         style={{ backgroundColor: "grey", objectFit: "cover" }}
-        src={imageSrc}
+        src={imageSrc.replace("upload/", "upload/c_scale,w_500/")}
       />
       <h1
         style={{

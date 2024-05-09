@@ -33,9 +33,9 @@ function AllPlacesPage() {
           }/favoritesPlaces`
         )
         .then((response) => {
-          console.log("fetched");
+          // console.log("fetched");
           setFavoritesPlaces(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((err) => {
           console.log(err);
@@ -78,8 +78,8 @@ function AllPlacesPage() {
         userId: user._id,
       })
       .then((response) => {
-        console.log(response);
-        console.log("Place added to favorites successfully!");
+        // console.log(response);
+        // console.log("Place added to favorites successfully!");
         alert("Place added to favorites successfully!");
       })
       .catch((err) => {
@@ -96,8 +96,8 @@ function AllPlacesPage() {
         }`
       )
       .then((response) => {
-        console.log(response);
-        console.log("Place removed from favorites successfully!");
+        // console.log(response);
+        // console.log("Place removed from favorites successfully!");
         alert("Place removed from favorites successfully!");
       })
       .catch((err) => {
@@ -141,7 +141,7 @@ function AllPlacesPage() {
               key={place._id}
               hoverable
               style={{ width: 300, margin: 20 }}
-              cover={<img alt={place.name} src={place.imageUrl} />}
+              cover={<img alt={place.name} src={place.imageUrl.replace("upload/", "upload/c_scale,w_500/")} />}
               onClick={() => showModal({ id: place._id, name: place.name })}
             >
               <Meta

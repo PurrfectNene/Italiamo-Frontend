@@ -115,7 +115,14 @@ function ProfilePage() {
               label: item.label,
               key: id,
               children: (
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingLeft: "12px",
+                    paddingRight: "12px",
+                  }}
+                >
                   <div
                     style={{
                       display: "flex",
