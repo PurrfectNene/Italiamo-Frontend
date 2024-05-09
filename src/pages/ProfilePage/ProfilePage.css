@@ -1,0 +1,54 @@
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  bottom:-105px;
+}
+
+.user-image {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%; /* Make it a circle */
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+}
+
+.user-image .hover-text span {
+  color: white!important;
+  font-size:1.1rem!important
+}
+
+.user-image .hover-text {
+  background:rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: all 0.2s;
+  border-radius: 100%;
+}
+
+.user-image:hover .hover-text {
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.user-image img {
+  display: flex;
+  width: 100%; /* Ensure the image fills the circle */
+  height: 100%; /* Maintain aspect ratio */
+  border-radius: 50%; /* Ensure the image inside the circle */
+  object-fit: cover;
+  text-align: center;
+}
+
+.upload-style .ant-upload-select {
+  width: 100%!important;
+  border: 0!important;
+  padding: 0!important;
+  height:auto!important;
+  margin: 0!important;
+}

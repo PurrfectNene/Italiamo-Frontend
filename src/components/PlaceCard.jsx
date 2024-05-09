@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function PlaceCard({ name, imageSrc }) {
+export default function PlaceCard({ name, imageSrc, onClick }) {
   return (
     <Link
       //   to={"/places/:id"}
@@ -10,12 +10,13 @@ export default function PlaceCard({ name, imageSrc }) {
         flexDirection: "column",
         textDecorationColor: "black",
       }}
+      onClick={onClick}
     >
       <img
         width={"100%"}
         height={200}
         style={{ backgroundColor: "grey", objectFit: "cover" }}
-        src={imageSrc}
+        src={imageSrc.replace("upload/", "upload/c_scale,w_500/")}
       />
       <h1
         style={{

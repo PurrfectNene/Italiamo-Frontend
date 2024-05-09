@@ -1,9 +1,13 @@
 import { Button, Card, Flex, Input, List, Select } from "antd";
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
 const { Option } = Select;
+
+const MotionCard = motion(Card);
+const MotionButton = motion(Button);
 
 function HomePage() {
   const [regions, setRegions] = useState([]);
@@ -16,7 +20,8 @@ function HomePage() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/regions`)
       .then((response) => {
-        setRegions(response.data.slice(0, 4));
+        const shuffledRegions = response.data.sort(() => Math.random() - 0.5);
+        setRegions(shuffledRegions.slice(0, 8));
       })
       .catch((err) => {
         console.log(err);
@@ -25,16 +30,8 @@ function HomePage() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/cities`)
       .then((response) => {
-        setCities(response.data.slice(0, 4));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/places`)
-      .then((response) => {
-        setPlaces(response.data.slice(0, 4));
+        const shuffledCities = response.data.sort(() => Math.random() - 0.5);
+        setCities(shuffledCities.slice(0, 8));
       })
       .catch((err) => {
         console.log(err);
@@ -65,13 +62,13 @@ function HomePage() {
     } else if (searchType === "places") {
       filteredItems = places;
     }
-    console.log(
-      filteredItems.filter((item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
-      ),
-      searchValue,
-      searchType
-    );
+    // console.log(
+    //   filteredItems.filter((item) =>
+    //     item.name.toLowerCase().includes(searchValue.toLowerCase())
+    //   ),
+    //   searchValue,
+    //   searchType
+    // );
     return filteredItems.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
@@ -80,81 +77,164 @@ function HomePage() {
   const renderPlaceCards = () => {
     return (
       <React.Fragment>
-        <Card
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
-          style={{ width: 300, margin: 20 }}
+          style={{ width: 200, margin: 20 }}
           cover={
-            <img
-              alt="Cultural"
-              src="https://www.meisterdrucke.lu/kunstwerke/1260px/Sandro_Botticelli_-_Venus_-_%28MeisterDrucke-686929%29.jpg"
-              style={{ height: 200, objectFit: "cover" }}
-            />
+            <Link
+              to={{ pathname: "/places/cultural" }}
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <img
+                alt="Cultural"
+                src="https://www.meisterdrucke.lu/kunstwerke/1260px/Sandro_Botticelli_-_Venus_-_%28MeisterDrucke-686929%29.jpg"
+                style={{ height: 200, objectFit: "cover", width: "100%" }}
+              />
+            </Link>
           }
         >
-          <Meta
-            title="Art&Culture"
-            description="Description of cultural place"
-          />
-        </Card>
-        <Card
-          hoverable
-          style={{ width: 300, margin: 20 }}
-          cover={
-            <img
-              alt="Food&Wine"
-              src="https://t3.ftcdn.net/jpg/02/39/91/54/360_F_239915415_3o2mMjkYZNrSsvyKWQaFuw9GYOs9OzzH.jpg"
-              style={{ height: 200, objectFit: "cover" }}
+          <Link
+            to={{ pathname: "/places/cultural" }}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <Meta
+              title="Art&Culture"
+              description="Explore Italy's Cultural Wonders: Where Every Place Tells a Story of Beauty and History."
             />
-          } // Replace villages.jpg with your image URL
-        >
-          <Meta title="Food&Wine" description="Description of villages place" />
-        </Card>
-        <Card
+          </Link>
+        </MotionCard>
+
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
-          style={{ width: 300, margin: 20 }}
+          style={{ width: 200, margin: 20 }}
           cover={
-            <img
-              alt="Villages"
-              src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/positano-fishing-village-amalfi-coast-campania-italy-20170918-v2-vertical-wingsdomain-art-and-photography.jpg"
-              style={{ height: 200, objectFit: "cover" }}
-            />
-          } // Replace cultural.jpg with your image URL
+            <Link
+              to={{ pathname: "/places/food&wine" }}
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <img
+                alt="Food&Wine"
+                src="https://t3.ftcdn.net/jpg/02/39/91/54/360_F_239915415_3o2mMjkYZNrSsvyKWQaFuw9GYOs9OzzH.jpg"
+                style={{ height: 200, objectFit: "cover", width: "100%" }}
+              />
+            </Link>
+          }
         >
-          <Meta title="Villages" description="Description of cultural place" />
-        </Card>
-        <Card
+          <Link
+            to={{ pathname: "/places/food&wine" }}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <Meta
+              title="Food&Wine"
+              description="Indulge in Italy's flavorful symphony: Taste the Passion, Savor the Tradition"
+            />
+          </Link>
+        </MotionCard>
+
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
-          style={{ width: 300, margin: 20 }}
+          style={{ width: 200, margin: 20 }}
           cover={
-            <img
-              alt="Nature"
-              src="https://handluggageonly.co.uk/wp-content/uploads/2018/09/Hand-Luggage-Only-15-4.jpg"
-              style={{ height: 200, objectFit: "cover" }}
-            />
-          } // Replace cultural.jpg with your image URL
+            <Link
+              to={{ pathname: "/places/villages" }}
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <img
+                alt="Villages"
+                src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/positano-fishing-village-amalfi-coast-campania-italy-20170918-v2-vertical-wingsdomain-art-and-photography.jpg"
+                style={{ height: 200, objectFit: "cover", width: "100%" }}
+              />
+            </Link>
+          }
         >
-          <Meta title="Nature" description="Description of cultural place" />
-        </Card>
-        <Card
+          <Link
+            to={{ pathname: "/places/villages" }}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <Meta
+              title="Villages"
+              description="Step into Italy's Timeless Charm: Where Every Village Tells a Story of Tradition and Warmth."
+            />
+          </Link>
+        </MotionCard>
+
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
           hoverable
-          style={{ width: 300, margin: 20 }}
+          style={{ width: 200, margin: 20 }}
           cover={
-            <img
-              alt="Relax&Wellness"
-              src="https://domusdejanas.com/wp-content/uploads/2015/02/centrospa.jpg"
-              style={{ height: 200, objectFit: "cover" }}
-            />
-          } // Replace cultural.jpg with your image URL
+            <Link
+              to={{ pathname: "/places/nature" }}
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <img
+                alt="Nature"
+                src="https://handluggageonly.co.uk/wp-content/uploads/2018/09/Hand-Luggage-Only-15-4.jpg"
+                style={{ height: 200, objectFit: "cover", width: "100%" }}
+              />
+            </Link>
+          }
         >
-          <Meta
-            title="Relax&Wellness"
-            description="Description of cultural place"
-          />
-        </Card>
+          <Link
+            to={{ pathname: "/places/nature" }}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <Meta
+              title="Nature"
+              description="Embrace Italy's Natural Splendor: Where beauty blooms and serenity flourishes."
+            />
+          </Link>
+        </MotionCard>
+
+        <MotionCard
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
+          hoverable
+          style={{ width: 200, margin: 20 }}
+          cover={
+            <Link
+              to={{ pathname: "/places/relax&wellness" }}
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <img
+                alt="Relax&Wellness"
+                src="https://domusdejanas.com/wp-content/uploads/2015/02/centrospa.jpg"
+                style={{ height: 200, objectFit: "cover", width: "100%" }}
+              />
+            </Link>
+          }
+        >
+          <Link
+            to={{ pathname: "/places/relax&wellness" }}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <Meta
+              title="Relax&Wellness"
+              description="Revel in Italy's Tranquil Retreats: Renew Your Soul in the Heart of Relaxation."
+            />
+          </Link>
+        </MotionCard>
       </React.Fragment>
     );
   };
-  // carrousel & links to revise
+
   return (
     <div>
       <div>
@@ -186,7 +266,7 @@ function HomePage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "B76F38",
+          backgroundColor: "#FDFCFA",
         }}
       >
         <div style={{ display: "flex" }}>
@@ -237,7 +317,14 @@ function HomePage() {
       </div>
 
       <div style={{ marginTop: "100px" }}>
-        <h2>Regions</h2>
+        <motion.h2
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Regions
+        </motion.h2>
         <div
           style={{
             display: "flex",
@@ -246,15 +333,45 @@ function HomePage() {
           }}
         >
           {regions.map((region) => (
-            <Link
-              to={`/regions/${region._id}`}
+            <MotionCard
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={region._id}
-              style={{ textDecoration: "none", color: "inherit" }}
+              hoverable
+              style={{ width: 300, margin: 20 }}
+              cover={
+                <Link
+                  to={`/regions/${region._id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    width: "100%",
+                  }}
+                >
+                  <img
+                    alt={region.name}
+                    src={region.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_500/"
+                    )}
+                    style={{
+                      width: "100%",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Link>
+              }
             >
-              <Card
-                hoverable
-                style={{ width: 300, margin: 20 }}
-                cover={<img alt={region.name} src={region.imageUrl} />}
+              <Link
+                to={`/regions/${region._id}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  width: "100%",
+                }}
               >
                 <Meta
                   title={region.name}
@@ -262,17 +379,38 @@ function HomePage() {
                 />
                 <br></br>
                 <Flex gap="small" wrap="wrap">
-                  <Button type="link">What to see</Button>
+                  <Button type="link" style={{ color: "#5F4E44" }}>
+                    Read more
+                  </Button>
                 </Flex>
-              </Card>
-            </Link>
+              </Link>
+            </MotionCard>
           ))}
         </div>
-        <Link to="/regions">Discover all regions</Link>
+        <Link to="/regions" style={{ textDecoration: "none" }}>
+          <Button
+            initial={{ opacity: 0, bottom: -50 }}
+            viewport={{ amount: 0.3, once: true }}
+            whileInView={{ opacity: 1, bottom: 0 }}
+            transition={{ duration: 0.7 }}
+            type="primary"
+            style={{ background: "#927766" }}
+          >
+            Discover all regions
+          </Button>
+        </Link>
       </div>
+      <br />
 
       <div>
-        <h2>Cities</h2>
+        <motion.h2
+          initial={{ opacity: 0, bottom: -50 }}
+          viewport={{ amount: 0.3, once: true }}
+          whileInView={{ opacity: 1, bottom: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Cities
+        </motion.h2>
         <div
           style={{
             display: "flex",
@@ -281,39 +419,69 @@ function HomePage() {
           }}
         >
           {cities.map((city) => (
-            <Link
-              to={`/cities/${city._id}`}
+            <MotionCard
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
               key={city._id}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Card
-                hoverable
-                style={{ width: 300, margin: 20 }}
-                cover={<img alt={city.name} src={city.imageUrl} />}
-              >
+              hoverable
+              style={{ width: 300, margin: 20 }}
+              cover={
                 <Link
-                  to={`/regions/${city.region._id}`}
+                  to={`/cities/${city._id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Meta
-                    title={city.name}
-                    description={truncateDescription(city.description)}
+                  <img
+                    alt={city.name}
+                    src={city.imageUrl.replace(
+                      "upload/",
+                      "upload/c_scale,w_500/"
+                    )}
+                    style={{
+                      width: "100%",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
                   />
-                  <p style={{ margin: "10px 0", fontWeight: "bold" }}>
-                    {city.region.name}
-                  </p>
                 </Link>
+              }
+            >
+              <Link
+                to={`/regions/${city.region._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Meta
+                  title={city.name}
+                  description={truncateDescription(city.description)}
+                />
+                <p style={{ margin: "10px 0", fontWeight: "bold" }}>
+                  {city.region.name}
+                </p>
                 <Flex
                   gap="small"
                   wrap="wrap"
                   style={{ justifyContent: "flex-end" }}
                 ></Flex>
-              </Card>
-            </Link>
+              </Link>
+            </MotionCard>
           ))}
         </div>
-        <Link to="/cities">Discover all cities</Link>
+        <Link to="/cities" style={{ textDecoration: "none" }}>
+          <Button
+            initial={{ opacity: 0, bottom: -50 }}
+            viewport={{ amount: 0.3, once: true }}
+            whileInView={{ opacity: 1, bottom: 0 }}
+            transition={{ duration: 0.7 }}
+            type="primary"
+            style={{ background: "#927766" }}
+          >
+            Discover all cities
+          </Button>
+        </Link>
       </div>
+
+      <br />
 
       <div>
         <h2>Getting inspiration</h2>
@@ -325,6 +493,21 @@ function HomePage() {
           }}
         >
           {renderPlaceCards()}
+        </div>
+
+        <div style={{ marginBottom: "50px" }}>
+          <Link to="/places/allplaces" style={{ textDecoration: "none" }}>
+            <Button
+              initial={{ opacity: 0, bottom: -50 }}
+              viewport={{ amount: 0.3, once: true }}
+              whileInView={{ opacity: 1, bottom: 0 }}
+              transition={{ duration: 0.7 }}
+              type="primary"
+              style={{ background: "#927766" }}
+            >
+              Discover all places
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

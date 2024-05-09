@@ -5,8 +5,10 @@ import TabPane from "antd/es/tabs/TabPane";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GoogleMap from "../components/GoogleMap";
-import PlaceCard from "../components/PlaceCard";
+import GoogleMap from "../../components/GoogleMap";
+import Loading from "../../components/Loading";
+import PlaceCard from "../../components/PlaceCard";
+import usePlaceModal from "../../hooks/usePlaceModal";
 import "./RegionDetailsPage.css";
 
 function RegionDetailsPage() {
@@ -46,8 +48,11 @@ function RegionDetailsPage() {
       });
   }, [id]);
 
+  // Place modal
+  const { showModal, Modal } = usePlaceModal();
+
   if (!region) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -130,38 +135,6 @@ function RegionDetailsPage() {
           <Col style={{ flex: 1, fontSize: "1rem" }}>
             <p>{region.description}</p>
           </Col>
-          {/* <Col
-            style={{
-              backgroundColor: "white",
-              padding: "1rem",
-              borderRadius: "0.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              minWidth: 400,
-              height: "fit-content",
-              boxShadow:
-                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-            }}
-          >
-            <h1 style={{ margin: 0, fontSize: "1.25rem" }}>Explore the area</h1>
-            <Wrapper
-              apiKey={import.meta.env.VITE_GOOGLEAPIKEY}
-              render={() => {
-                return <p>Loading...</p>;
-              }}
-            >
-              <GoogleMap />
-            </Wrapper>
-            <Row style={{ gap: "0.75em" }}>
-              <Rate
-                disabled
-                value={4}
-                style={{ marginBottom: "0.5rem", fontSize: "1rem" }}
-              />{" "}
-              4.5 (1249 reviews)
-            </Row>
-          </Col> */}
         </Row>
       </section>
       <section
@@ -184,7 +157,7 @@ function RegionDetailsPage() {
           <Wrapper
             apiKey={import.meta.env.VITE_GOOGLEAPIKEY}
             render={() => {
-              return <p>Loading...</p>;
+              return <Loading />;
             }}
           >
             <GoogleMap />
@@ -246,6 +219,7 @@ function RegionDetailsPage() {
               >
                 <RightOutlined />
               </Button>
+
               <Carousel
                 ref={carouselRef}
                 style={{ height: "400px" }}
@@ -258,7 +232,10 @@ function RegionDetailsPage() {
                   <div key={city._id}>
                     <Link to={`/cities/${city._id}`}>
                       <img
-                        src={city.imageUrl}
+                        src={city.imageUrl.replace(
+                          "upload/",
+                          "upload/c_scale,w_1000/"
+                        )}
                         style={{
                           height: "280px",
                           width: "100%",
@@ -308,28 +285,7 @@ function RegionDetailsPage() {
           flexDirection: "column",
           alignItems: "center",
         }}
-      >
-        {/* <Row style={{ maxWidth: 1200, padding: "2rem" }}>
-          <h1 style={{ margin: 0 }}>{region.name}</h1>
-          <p>{region.description}</p>
-          <h2>Cities in {region.name}</h2>
-          <ul>
-            {cities.map((city) => (
-              <li key={city._id}>
-                <Link to={`/cities/${city._id}`}>{city.name}</Link>
-              </li>
-            ))}
-          </ul>
-          <h2>Places in {region.name}</h2>
-          <ul>
-            {places.map((place) => (
-              <li key={place._id}>
-                <Link to={`/places/${place.city._id}`}>{place.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </Row> */}
-      </section>
+      ></section>
       <section
         id="cities"
         style={{
@@ -338,6 +294,7 @@ function RegionDetailsPage() {
           justifyContent: "center",
         }}
       >
+        <Modal />
         <div
           style={{
             maxWidth: 1200,
@@ -373,6 +330,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -390,6 +350,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -408,6 +371,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -425,6 +391,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
@@ -442,6 +411,9 @@ function RegionDetailsPage() {
                     key={index}
                     name={place.name}
                     imageSrc={place.imageUrl}
+                    onClick={() => {
+                      showModal({ id: place._id, name: place.name });
+                    }}
                   />
                 ))}
               </div>
