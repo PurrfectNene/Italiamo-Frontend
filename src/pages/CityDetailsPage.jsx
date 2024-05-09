@@ -111,7 +111,7 @@ function CityDetailsPage() {
             minHeight: 0,
           }}
         >
-          <Col style={{ flex: 1 }}>
+          <Col style={{ flex: 1, maxHeight: "100%" }}>
             <img
               src={city?.imageUrl}
               style={{
@@ -123,84 +123,91 @@ function CityDetailsPage() {
               height="100%"
             />
           </Col>
-          <Col
-            className="hide-scroll"
-            style={{
-              width: 160,
-              overflowY: "auto",
-              height: "100%",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            {places.map((place, index) => (
-              <PlaceHoverableCard
-                key={index}
-                onClick={() => setSelectedPlace(index)}
-                data={place}
-              />
-            ))}
-          </Col>
-          <Col
-            style={{
-              width: 360,
-              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-              //   height: "100%",
-              height: "fit-content",
-              borderRadius: "1rem",
-              padding: "1.25rem",
-            }}
-          >
-            {places?.[selectedPlace]?._id && (
-              <img
-                src={places?.[selectedPlace]?.imageUrl}
-                width="100%"
-                height="200px"
-                style={{ borderRadius: "0.5rem", objectFit: "cover" }}
-              />
-            )}
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <h1
+          {places.length >= 0 && (
+            <>
+              <Col
+                className="hide-scroll"
                 style={{
-                  marginTop: "0",
-                  marginBottom: 0,
-                  fontSize: "1.5rem",
+                  width: 160,
+                  overflowY: "auto",
+                  height: "fit-content",
+                  maxHeight: "100%",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "1rem",
                 }}
               >
-                {places?.[selectedPlace]?.name}
-              </h1>
-              <a
+                {places.map((place, index) => (
+                  <PlaceHoverableCard
+                    key={index}
+                    onClick={() => setSelectedPlace(index)}
+                    data={place}
+                  />
+                ))}
+              </Col>
+              <Col
                 style={{
-                  display: "block",
-                  marginLeft: "auto",
-                  padding: "0.25rem",
+                  width: 360,
+                  boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                  //   height: "100%",
+                  height: "fit-content",
+                  maxHeight: "100%",
+                  borderRadius: "1rem",
+                  padding: "1.25rem",
                 }}
-                className="force-pointer"
-                onClick={showDrawer}
               >
-                <Rate
-                  disabled
-                  value={calculateReviewsAverage(
-                    places?.[selectedPlace]?.reviews
-                  )}
-                  style={{
-                    fontSize: "1rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                />
-              </a>
-            </div>
+                {places?.[selectedPlace]?._id && (
+                  <img
+                    src={places?.[selectedPlace]?.imageUrl}
+                    width="100%"
+                    height="200px"
+                    style={{ borderRadius: "0.5rem", objectFit: "cover" }}
+                  />
+                )}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <h1
+                    style={{
+                      marginTop: "0",
+                      marginBottom: 0,
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    {places?.[selectedPlace]?.name}
+                  </h1>
+                  <a
+                    style={{
+                      display: "block",
+                      marginLeft: "auto",
+                      padding: "0.25rem",
+                    }}
+                    className="force-pointer"
+                    onClick={showDrawer}
+                  >
+                    <Rate
+                      disabled
+                      value={calculateReviewsAverage(
+                        places?.[selectedPlace]?.reviews
+                      )}
+                      style={{
+                        fontSize: "1rem",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    />
+                  </a>
+                </div>
 
-            <span style={{ color: "#797979" }}>
-              {places?.[selectedPlace]?.type}
-            </span>
-            <p style={{ marginTop: "0.35rem", marginBottom: 0 }}>
-              {places?.[selectedPlace]?.description}
-            </p>
-          </Col>
+                <span style={{ color: "#797979" }}>
+                  {places?.[selectedPlace]?.type}
+                </span>
+                <p style={{ marginTop: "0.35rem", marginBottom: 0 }}>
+                  {places?.[selectedPlace]?.description}
+                </p>
+              </Col>
+            </>
+          )}
+
           <Drawer
             title={places?.[selectedPlace]?.name + " Reviews"}
             onClose={onClose}

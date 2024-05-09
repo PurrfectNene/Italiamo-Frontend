@@ -4,13 +4,13 @@ export default function PlaceHoverableCard({ link, data, onClick }) {
   const Wrapper = ({ children }) => {
     if (link) {
       return (
-        <Link onClick={onClick} to={link}>
+        <Link onClick={onClick} to={link} style={{ height: "fit-content" }}>
           {children}
         </Link>
       );
     }
     return (
-      <a onClick={onClick} to={link}>
+      <a onClick={onClick} to={link} style={{ height: "fit-content" }}>
         {children}
       </a>
     );
