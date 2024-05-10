@@ -80,6 +80,7 @@ function RegionDetailsPage() {
             borderRadius: "1rem",
             overflow: "hidden",
             maxWidth: 1200,
+            aspectRatio: "1200 / 520",
           }}
         >
           <img src={region?.imageUrl} />
@@ -120,8 +121,7 @@ function RegionDetailsPage() {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            />{" "}
-            4.5 (1249 reviews)
+            />
           </Row>
         </Row>
 
@@ -335,6 +335,17 @@ function RegionDetailsPage() {
                     }}
                   />
                 ))}
+                {filteredPlaces.length === 0 && (
+                  <span
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      color: "#818181",
+                    }}
+                  >
+                    Empty
+                  </span>
+                )}
               </div>
             </TabPane>
             <TabPane tab="Food&Wine" key="Food&Wine">
@@ -355,6 +366,17 @@ function RegionDetailsPage() {
                     }}
                   />
                 ))}
+                {filteredPlaces.length === 0 && (
+                  <span
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      color: "#818181",
+                    }}
+                  >
+                    Empty
+                  </span>
+                )}
               </div>
             </TabPane>
 
@@ -376,6 +398,17 @@ function RegionDetailsPage() {
                     }}
                   />
                 ))}
+                {filteredPlaces.length === 0 && (
+                  <span
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      color: "#818181",
+                    }}
+                  >
+                    Empty
+                  </span>
+                )}
               </div>
             </TabPane>
             <TabPane tab="Villages" key="Villages">
@@ -396,6 +429,17 @@ function RegionDetailsPage() {
                     }}
                   />
                 ))}
+                {filteredPlaces.length === 0 && (
+                  <span
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      color: "#818181",
+                    }}
+                  >
+                    Empty
+                  </span>
+                )}
               </div>
             </TabPane>
             <TabPane tab="Nature" key="Nature">
@@ -416,6 +460,17 @@ function RegionDetailsPage() {
                     }}
                   />
                 ))}
+                {filteredPlaces.length === 0 && (
+                  <span
+                    style={{
+                      textAlign: "center",
+                      width: "100%",
+                      color: "#818181",
+                    }}
+                  >
+                    Empty
+                  </span>
+                )}
               </div>
             </TabPane>
           </Tabs>
