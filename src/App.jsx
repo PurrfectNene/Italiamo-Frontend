@@ -19,6 +19,7 @@ import NaturePlacesPage from "./pages/NaturePlacesPage";
 import RelaxWellnessPlacesPage from "./pages/RelaxWellnessPlacesPage";
 import VillagesPlacesPage from "./pages/VillagesPlacesPage";
 
+import IsAdmin from "./components/IsAdmin";
 import ProfilePage from "./pages/ProfilePage";
 import RegionDetailsPage from "./pages/RegionDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -69,9 +70,9 @@ function App() {
           exact
           path="/dashboard"
           element={
-            <IsPrivate>
+            <IsAdmin>
               <DashboardPage />
-            </IsPrivate>
+            </IsAdmin>
           }
         />
       </Routes>
