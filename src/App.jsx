@@ -47,7 +47,7 @@ function App() {
         <Route exact path="/places/cultural" element={<CulturalPlacesPage />} />
         <Route
           exact
-          path="/places/food&wine"
+          path="/places/Food&Wine"
           element={<FoodAndWinePlacesPage />}
         />
         <Route exact path="/places/nature" element={<NaturePlacesPage />} />
