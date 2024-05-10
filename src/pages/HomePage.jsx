@@ -316,7 +316,13 @@ function HomePage() {
         </div>
       </div>
 
-      <div style={{ marginTop: "100px" }}>
+      <div
+        style={{
+          marginTop: "100px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+        }}
+      >
         <motion.h2
           initial={{ opacity: 0, bottom: -50 }}
           viewport={{ amount: 0.3, once: true }}
@@ -402,7 +408,12 @@ function HomePage() {
       </div>
       <br />
 
-      <div>
+      <div
+        style={{
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+        }}
+      >
         <motion.h2
           initial={{ opacity: 0, bottom: -50 }}
           viewport={{ amount: 0.3, once: true }}
@@ -483,7 +494,12 @@ function HomePage() {
 
       <br />
 
-      <div>
+      <div
+        style={{
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+        }}
+      >
         <h2>Getting inspiration</h2>
         <div
           style={{

@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import usePlaceModal from "../hooks/usePlaceModal";
 
 const { Meta } = Card;
 
@@ -17,6 +18,8 @@ function RelaxWellnessPlacesPage() {
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [placesMaster, setPlacesMaster] = useState([]);
+  // Place modal
+  const { showModal, Modal } = usePlaceModal();
 
   useEffect(() => {
     axios
@@ -96,6 +99,7 @@ function RelaxWellnessPlacesPage() {
 
   return (
     <div>
+      <Modal />
       <div
         style={{
           backgroundImage:
@@ -159,7 +163,7 @@ function RelaxWellnessPlacesPage() {
             style={{ width: 300, margin: 20 }}
             cover={
               <Link
-                to={`/places/${place._id}`}
+                onClick={() => showModal({ id: place._id, name: place.name })}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <img
@@ -174,7 +178,7 @@ function RelaxWellnessPlacesPage() {
             }
           >
             <Link
-              to={`/places/${place._id}`}
+              onClick={() => showModal({ id: place._id, name: place.name })}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <Meta
@@ -205,7 +209,7 @@ function RelaxWellnessPlacesPage() {
                 </button>
               )}
               <Link
-                to={`/cities/${place.city}`}
+                to={`/cities/${place.city._id}`}
                 style={{ textDecoration: "none", color: "#5F4E44" }}
               >
                 <p style={{ margin: "10px 0", fontWeight: "bold" }}>

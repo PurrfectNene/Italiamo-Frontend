@@ -2,10 +2,10 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Button, Card, Flex, Input, Pagination, Select } from "antd";
 
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { motion } from "framer-motion";
 
 const MotionCard = motion(Card);
 
@@ -13,6 +13,7 @@ const { Meta } = Card;
 const { Option } = Select;
 
 function AllRegionsPage() {
+  const [firstTime, setFirstTime] = useState(true);
   const { isLoggedIn, user } = useContext(AuthContext);
   const [regions, setRegions] = useState([]);
   const [sortBy, setSortBy] = useState(null);
@@ -63,7 +64,10 @@ function AllRegionsPage() {
     setRegions(currentRegions);
   }, [filteredRegions, currentPage, regionsPerPage]);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setFirstTime(false);
+    setCurrentPage(pageNumber);
+  };
 
   const truncateDescription = (description) => {
     return description.slice(0, 60) + (description.length > 60 ? "..." : "");
@@ -210,7 +214,10 @@ function AllRegionsPage() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <MotionCard
-              initial={{  opacity: currentPage !== 1 ? 1 : 0, bottom: -50 }}
+              initial={{
+                opacity: !firstTime ? 1 : 0,
+                bottom: !firstTime ? 0 : -50,
+              }}
               viewport={{ amount: 0.3, once: true }}
               whileInView={{ opacity: 1, bottom: 0 }}
               transition={{ duration: 0.7 }}
