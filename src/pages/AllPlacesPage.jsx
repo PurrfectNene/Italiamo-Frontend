@@ -246,7 +246,7 @@ function AllPlacesPage() {
       </div>
       <div id="food&wine">
         {renderPlacesByType("Food&Wine")}
-        <Link to="/places/food&wine">
+        <Link to="/places/Food&Wine">
           <Button
             type="primary"
             style={{

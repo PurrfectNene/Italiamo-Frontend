@@ -117,7 +117,7 @@ function HomePage() {
           style={{ width: 200, margin: 20 }}
           cover={
             <Link
-              to={{ pathname: "/places/food&wine" }}
+              to={{ pathname: "/places/Food&Wine" }}
               style={{ textDecoration: "none", width: "100%" }}
             >
               <img
@@ -129,7 +129,7 @@ function HomePage() {
           }
         >
           <Link
-            to={{ pathname: "/places/food&wine" }}
+            to={{ pathname: "/places/Food&Wine" }}
             style={{ textDecoration: "none", width: "100%" }}
           >
             <Meta
