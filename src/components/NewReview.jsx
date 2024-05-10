@@ -1,11 +1,17 @@
 import { Button, Rate } from "antd";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { AuthContext } from "../context/auth.context";
 
 export default function NewReview({ placeId, state }) {
   const [reviews, setReviews] = state;
   const [rating, setRating] = useState(1);
   const comment = useRef(null);
+  const { isLoggedIn } = useContext(AuthContext);
+
+  if (!isLoggedIn) {
+    return null;
+  }
 
   function submitReview() {
     if (comment.current.value === "") {
